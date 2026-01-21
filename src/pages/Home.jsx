@@ -24,16 +24,25 @@ export default function Home() {
     }
   }, [location.hash]);
 
-  return (
-    <div className="space-y-24">
-      <Hero />
-      <Projects />
-      <Academic />
-      <Experience />
-      <Skills />
-      <Contact />
-    </div>
-  );
+  try {
+    return (
+      <div className="space-y-24">
+        <Hero />
+        <Projects />
+        <Academic />
+        <Experience />
+        <Skills />
+        <Contact />
+      </div>
+    );
+  } catch (error) {
+    console.error('Error rendering Home:', error);
+    return (
+      <div className="section pt-12">
+        <h1 className="text-white">Error loading content. Please check console.</h1>
+      </div>
+    );
+  }
 }
 
 

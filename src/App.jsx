@@ -22,15 +22,16 @@ function App() {
                            currentPath.includes('%c2%a0') ||
                            currentPath.includes('%C2%A0');
     
-    // If URL contains invalid characters and we're not already on home, redirect
-    if (hasInvalidChars && location.pathname !== '/') {
-      navigate('/', { replace: true });
-      return;
-    }
-    
-    // If on home page with invalid chars in hash/search, clean it
-    if (hasInvalidChars && location.pathname === '/') {
-      navigate('/', { replace: true });
+    // If URL contains invalid characters, redirect to clean home page
+    // Use setTimeout to allow content to render first
+    if (hasInvalidChars) {
+      const timer = setTimeout(() => {
+        if (window.location.pathname !== '/' || window.location.search || window.location.hash) {
+          window.history.replaceState(null, '', '/');
+          navigate('/', { replace: true });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [location.pathname, location.search, location.hash, navigate]);
 

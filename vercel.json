@@ -6,6 +6,19 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "query",
+          "key": "nbsp"
+        }
+      ],
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }
 
