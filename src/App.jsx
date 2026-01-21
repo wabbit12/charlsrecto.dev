@@ -13,12 +13,26 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clean up URL if it has trailing spaces, nbsp, or other whitespace
-    const pathname = location.pathname;
+    // Handle URLs with &nbsp or other invalid characters - redirect to home
+    const pathname = decodeURIComponent(location.pathname);
     const search = location.search;
     const hash = location.hash;
     
-    // Remove trailing whitespace, nbsp, and other invisible characters
+    // Check if URL contains &nbsp, nbsp entity, or invalid characters
+    const fullUrl = pathname + search + hash;
+    const hasInvalidChars = fullUrl.includes('&nbsp') || 
+                           fullUrl.includes('\u00A0') ||
+                           fullUrl.includes('%C2%A0') ||
+                           fullUrl.includes('%26nbsp') ||
+                           fullUrl.includes('%c2%a0');
+    
+    // If URL contains invalid characters, redirect to home immediately
+    if (hasInvalidChars) {
+      navigate('/', { replace: true });
+      return;
+    }
+    
+    // Clean up trailing whitespace
     const cleanPathname = pathname.replace(/[\s\u00A0\u2000-\u200B\u2028\u2029\uFEFF]+$/g, '').trim();
     const cleanSearch = search.replace(/[\s\u00A0\u2000-\u200B\u2028\u2029\uFEFF]+$/g, '').trim();
     const cleanHash = hash.replace(/[\s\u00A0\u2000-\u200B\u2028\u2029\uFEFF]+$/g, '').trim();
@@ -39,6 +53,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </main>
       <Footer />
