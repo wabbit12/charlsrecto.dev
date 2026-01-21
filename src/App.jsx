@@ -14,41 +14,31 @@ function App() {
 
   useEffect(() => {
     // Handle URLs with &nbsp or other invalid characters - redirect to home
-    const pathname = decodeURIComponent(location.pathname);
-    const search = location.search;
-    const hash = location.hash;
+    const currentPath = location.pathname + location.search + location.hash;
     
-    // Check if URL contains &nbsp, nbsp entity, or invalid characters
-    const fullUrl = pathname + search + hash;
-    const hasInvalidChars = fullUrl.includes('&nbsp') || 
-                           fullUrl.includes('\u00A0') ||
-                           fullUrl.includes('%C2%A0') ||
-                           fullUrl.includes('%26nbsp') ||
-                           fullUrl.includes('%c2%a0');
+    // Check if URL contains &nbsp or invalid characters
+    const hasInvalidChars = currentPath.includes('&nbsp') || 
+                           currentPath.includes('%26nbsp') ||
+                           currentPath.includes('%c2%a0') ||
+                           currentPath.includes('%C2%A0');
     
-    // If URL contains invalid characters, redirect to home immediately
-    if (hasInvalidChars) {
+    // If URL contains invalid characters and we're not already on home, redirect
+    if (hasInvalidChars && location.pathname !== '/') {
       navigate('/', { replace: true });
       return;
     }
     
-    // Clean up trailing whitespace
-    const cleanPathname = pathname.replace(/[\s\u00A0\u2000-\u200B\u2028\u2029\uFEFF]+$/g, '').trim();
-    const cleanSearch = search.replace(/[\s\u00A0\u2000-\u200B\u2028\u2029\uFEFF]+$/g, '').trim();
-    const cleanHash = hash.replace(/[\s\u00A0\u2000-\u200B\u2028\u2029\uFEFF]+$/g, '').trim();
-    
-    // If URL needs cleaning, redirect to clean version
-    if (pathname !== cleanPathname || search !== cleanSearch || hash !== cleanHash) {
-      const cleanUrl = cleanPathname + cleanSearch + cleanHash;
-      navigate(cleanUrl, { replace: true });
+    // If on home page with invalid chars in hash/search, clean it
+    if (hasInvalidChars && location.pathname === '/') {
+      navigate('/', { replace: true });
     }
-  }, [location, navigate]);
+  }, [location.pathname, location.search, location.hash, navigate]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 relative">
       <AnimatedBackground />
       <Header />
-      <main className="pb-24 relative z-10">
+      <main className="pb-24 relative z-10 min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
