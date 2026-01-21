@@ -10,12 +10,12 @@ function FloatingParticle({ delay, duration, x, y, size, color }) {
         left: x + '%',
         top: y + '%',
         background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-        boxShadow: `0 0 ${size * 2}px ${color}`,
+        boxShadow: `0 0 ${size * 3}px ${color}, 0 0 ${size * 5}px ${color}`,
       }}
       animate={{
         y: [0, -100, 0],
         x: [0, Math.random() * 40 - 20, 0],
-        opacity: [0.3, 0.8, 0.3],
+        opacity: [0.5, 1.0, 0.5],
         scale: [1, 1.2, 1],
       }}
       transition={{
@@ -31,7 +31,7 @@ function FloatingParticle({ delay, duration, x, y, size, color }) {
 function LightBeam({ delay, duration, x, rotation }) {
   return (
     <motion.div
-      className="absolute w-1 h-32 opacity-30"
+      className="absolute w-1 h-32 opacity-50"
       style={{
         left: x + '%',
         top: '0%',
@@ -42,7 +42,7 @@ function LightBeam({ delay, duration, x, rotation }) {
       }}
       animate={{
         y: [0, 1000],
-        opacity: [0.2, 0.5, 0.2],
+        opacity: [0.4, 0.7, 0.4],
       }}
       transition={{
         duration: duration || 15 + Math.random() * 10,
@@ -60,8 +60,8 @@ function AnimatedGradient() {
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full blur-3xl"
         style={{
-          background:
-            'radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, transparent 70%)',
+        background:
+          'radial-gradient(circle, rgba(124, 58, 237, 0.6) 0%, transparent 70%)',
           top: '10%',
           left: '10%',
         }}
@@ -69,7 +69,7 @@ function AnimatedGradient() {
           x: [0, 100, 0],
           y: [0, 50, 0],
           scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
+          opacity: [0.5, 0.7, 0.5],
         }}
         transition={{
           duration: 20,
@@ -80,8 +80,8 @@ function AnimatedGradient() {
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
         style={{
-          background:
-            'radial-gradient(circle, rgba(34, 211, 238, 0.4) 0%, transparent 70%)',
+        background:
+          'radial-gradient(circle, rgba(34, 211, 238, 0.6) 0%, transparent 70%)',
           bottom: '20%',
           right: '15%',
         }}
@@ -89,7 +89,7 @@ function AnimatedGradient() {
           x: [0, -80, 0],
           y: [0, -60, 0],
           scale: [1, 1.3, 1],
-          opacity: [0.25, 0.45, 0.25],
+          opacity: [0.4, 0.6, 0.4],
         }}
         transition={{
           duration: 25,
@@ -100,8 +100,8 @@ function AnimatedGradient() {
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full blur-3xl"
         style={{
-          background:
-            'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)',
+        background:
+          'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%)',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -109,7 +109,7 @@ function AnimatedGradient() {
         animate={{
           rotate: [0, 360],
           scale: [1, 1.1, 1],
-          opacity: [0.2, 0.4, 0.2],
+          opacity: [0.35, 0.55, 0.35],
         }}
         transition={{
           duration: 30,
@@ -123,11 +123,11 @@ function AnimatedGradient() {
 
 export default function AnimatedBackground() {
   const colors = [
-    'rgba(124, 58, 237, 0.6)',
-    'rgba(34, 211, 238, 0.6)',
-    'rgba(168, 85, 247, 0.6)',
-    'rgba(236, 72, 153, 0.5)',
-    'rgba(59, 130, 246, 0.5)',
+    'rgba(124, 58, 237, 0.8)',
+    'rgba(34, 211, 238, 0.8)',
+    'rgba(168, 85, 247, 0.8)',
+    'rgba(236, 72, 153, 0.7)',
+    'rgba(59, 130, 246, 0.7)',
   ];
 
   const particles = Array.from({ length: 30 }, (_, i) => ({

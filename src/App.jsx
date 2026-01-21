@@ -42,8 +42,9 @@ function App() {
   }, [location.pathname, location.search, location.hash, navigate]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 relative">
+    <div className="min-h-screen text-slate-50 relative">
       <AnimatedBackground />
+      <div className="fixed inset-0 bg-slate-950/70 pointer-events-none" style={{ zIndex: -1 }} />
       <Header />
       <main className="pb-24 relative z-10 min-h-screen">
         <Routes>
