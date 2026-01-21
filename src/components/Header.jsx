@@ -94,7 +94,7 @@ export default function Header() {
           className="text-lg font-semibold text-white tracking-tight"
           style={{
             fontFamily: "'Preospe', sans-serif",
-            textShadow: '0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3)',
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2)',
           }}
         >
           charlsrecto.dev
