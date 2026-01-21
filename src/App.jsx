@@ -13,7 +13,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Handle URLs with &nbsp or other invalid characters - redirect to home
+    // Handle URLs with &nbsp or other invalid characters
     const currentPath = location.pathname + location.search + location.hash;
     
     // Check if URL contains &nbsp or invalid characters
@@ -22,11 +22,17 @@ function App() {
                            currentPath.includes('%c2%a0') ||
                            currentPath.includes('%C2%A0');
     
-    // If URL contains invalid characters, redirect to clean home page
-    // Use setTimeout to allow content to render first
-    if (hasInvalidChars) {
+    // Also check if pathname is invalid (not a valid route)
+    const isValidPath = location.pathname === '/' || 
+                       location.pathname.startsWith('/projects/') || 
+                       location.pathname === '/dashboard';
+    
+    // If URL contains invalid characters or invalid path, redirect to home
+    // Use setTimeout to allow catch-all route to render content first
+    if (hasInvalidChars || !isValidPath) {
       const timer = setTimeout(() => {
-        if (window.location.pathname !== '/' || window.location.search || window.location.hash) {
+        // Only redirect if we're not already on clean home
+        if (location.pathname !== '/' || location.search || location.hash) {
           window.history.replaceState(null, '', '/');
           navigate('/', { replace: true });
         }
