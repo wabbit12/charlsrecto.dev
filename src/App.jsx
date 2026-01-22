@@ -1,12 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import ProjectPage from './pages/ProjectPage';
-import Dashboard from './pages/Dashboard';
 import AnimatedBackground from './components/AnimatedBackground';
 import { Route, Routes } from 'react-router-dom';
+
+// Code splitting for better initial load performance
+const Home = lazy(() => import('./pages/Home'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-slate-400">Loading...</div>
+  </div>
+);
 
 function App() {
   const location = useLocation();
@@ -52,12 +61,14 @@ function App() {
       <div className="fixed inset-0 bg-slate-950/70 pointer-events-none" style={{ zIndex: -1 }} />
       <Header />
       <main className="pb-24 relative z-10 min-h-screen">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects/:slug" element={<ProjectPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:slug" element={<ProjectPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </div>

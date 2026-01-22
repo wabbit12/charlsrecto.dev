@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Reveal from './Reveal';
 
 const skills = [
@@ -20,6 +21,7 @@ const skills = [
   { name: 'GitHub' },
 ];
 
+// Memoize icon mapping to prevent recreation
 const iconFor = (name) => {
   switch (name) {
     case 'React':
@@ -34,6 +36,8 @@ const iconFor = (name) => {
           src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
           alt="Java"
           className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
         />
       );
     case 'PHP':
@@ -44,6 +48,8 @@ const iconFor = (name) => {
           src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
           alt="Python"
           className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
         />
       );
     case 'C#':
@@ -52,6 +58,8 @@ const iconFor = (name) => {
           src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg"
           alt="C#"
           className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
         />
       );
     case 'Firebase':
@@ -60,6 +68,8 @@ const iconFor = (name) => {
           src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
           alt="Firebase"
           className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
         />
       );
     case 'MySQL':
@@ -68,6 +78,8 @@ const iconFor = (name) => {
           src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg"
           alt="MySQL"
           className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
         />
       );
     case 'MongoDB':
@@ -76,6 +88,8 @@ const iconFor = (name) => {
           src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-plain-wordmark.svg"
           alt="MongoDB"
           className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
         />
       );
     case 'Ionic':
@@ -98,7 +112,7 @@ const iconFor = (name) => {
 };
 
 function SkillLogo({ name }) {
-  const icon = iconFor(name);
+  const icon = useMemo(() => iconFor(name), [name]);
   return (
     <div className="h-10 w-10 shrink-0 rounded-lg bg-white/5 border border-white/10 grid place-items-center">
       {icon || (

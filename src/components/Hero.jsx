@@ -79,7 +79,13 @@ export default function Hero() {
             >
               {/* Profile Photo */}
               <div className="w-full aspect-[3/4] overflow-hidden">
-                <img src={profilePhoto} alt="Charls Dave Recto" className="w-full h-full object-cover" />
+                <img 
+                  src={profilePhoto} 
+                  alt="Charls Dave Recto" 
+                  className="w-full h-full object-cover"
+                  decoding="async"
+                  fetchPriority="high"
+                />
               </div>
 
               {/* Floating accent elements */}
@@ -128,6 +134,15 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4 pt-4">
               <motion.a
                 href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const sectionId = 'projects';
+                  const element = document.getElementById(sectionId);
+                  if (element) {
+                    window.history.pushState(null, '', `#${sectionId}`);
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="group relative rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 transition overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -145,6 +160,15 @@ export default function Hero() {
               </motion.a>
               <motion.a
                 href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const sectionId = 'contact';
+                  const element = document.getElementById(sectionId);
+                  if (element) {
+                    window.history.pushState(null, '', `#${sectionId}`);
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="rounded-full border-2 border-white/20 px-6 py-3 text-sm font-semibold text-white hover:border-primary/60 hover:text-primary transition"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

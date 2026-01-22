@@ -198,6 +198,8 @@ function ProjectImage({ image, isMobile = false, onImageClick }) {
           src={image.src}
           alt={image.label || 'Project screenshot'}
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </PhoneFrame>
     );
@@ -211,6 +213,8 @@ function ProjectImage({ image, isMobile = false, onImageClick }) {
           alt={image.label || 'Project screenshot'}
           className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity object-contain"
           onClick={() => onImageClick?.(image)}
+          loading="lazy"
+          decoding="async"
         />
       </div>
       {image.label && (

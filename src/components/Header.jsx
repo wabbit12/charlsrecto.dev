@@ -22,41 +22,52 @@ export default function Header() {
   useEffect(() => {
     if (location.pathname !== '/') return;
 
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      
-      // If near the top, set active to #top (About)
-      if (scrollPosition < 200) {
-        setActiveSection('#top');
-        return;
-      }
-
-      const sections = navItems
-        .map((item) => item.href.substring(1))
-        .filter((id) => id !== 'top'); // Exclude 'top' from section detection
-      const scrollPositionWithOffset = scrollPosition + 200; // Offset for header
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-
-      // Check if we're near the bottom of the page (contact section)
-      if (scrollPositionWithOffset + windowHeight >= documentHeight - 100) {
-        setActiveSection('#contact');
-        return;
-      }
-
-      // Otherwise, find the section that's currently in view
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i]);
-        if (section) {
-          const sectionTop = section.offsetTop;
-          const sectionBottom = sectionTop + section.offsetHeight;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY;
           
-          // Check if section is in viewport
-          if (scrollPositionWithOffset >= sectionTop - 100 && scrollPositionWithOffset < sectionBottom - 100) {
-            setActiveSection(`#${sections[i]}`);
-            break;
+          // If near the top, set active to #top (About)
+          if (scrollPosition < 200) {
+            setActiveSection('#top');
+            ticking = false;
+            return;
           }
-        }
+
+          const sections = navItems
+            .map((item) => item.href.substring(1))
+            .filter((id) => id !== 'top'); // Exclude 'top' from section detection
+          const scrollPositionWithOffset = scrollPosition + 200; // Offset for header
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight;
+
+          // Check if we're near the bottom of the page (contact section)
+          if (scrollPositionWithOffset + windowHeight >= documentHeight - 100) {
+            setActiveSection('#contact');
+            ticking = false;
+            return;
+          }
+
+          // Otherwise, find the section that's currently in view
+          for (let i = sections.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sections[i]);
+            if (section) {
+              const sectionTop = section.offsetTop;
+              const sectionBottom = sectionTop + section.offsetHeight;
+              
+              // Check if section is in viewport
+              if (scrollPositionWithOffset >= sectionTop - 100 && scrollPositionWithOffset < sectionBottom - 100) {
+                setActiveSection(`#${sections[i]}`);
+                ticking = false;
+                return;
+              }
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -67,7 +78,7 @@ export default function Header() {
       handleScroll();
     }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname, hash]);
 

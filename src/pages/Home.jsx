@@ -11,16 +11,17 @@ export default function Home() {
   const location = useLocation();
 
   useEffect(() => {
-    // Handle hash navigation on page load/refresh
+    // Handle hash navigation on page load/refresh (only on initial mount or when hash changes from external source)
     if (location.hash) {
-      // First, scroll to top instantly to prevent browser's default scroll
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      
-      // Clear hash immediately and stay at top
-      window.history.replaceState(null, '', '/');
-    } else {
-      // If no hash, ensure we're at top
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      const sectionId = location.hash.substring(1); // Remove the #
+      const element = document.getElementById(sectionId);
+      if (element) {
+        // Small delay to ensure DOM is ready
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
     }
   }, [location.hash]);
 

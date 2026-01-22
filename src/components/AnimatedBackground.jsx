@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 function FloatingParticle({ delay, duration, x, y, size, color }) {
   return (
@@ -130,23 +131,28 @@ export default function AnimatedBackground() {
     'rgba(59, 130, 246, 0.7)',
   ];
 
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    delay: Math.random() * 5,
-    duration: 10 + Math.random() * 10,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: 3 + Math.random() * 4,
-    color: colors[Math.floor(Math.random() * colors.length)],
-  }));
+  // Memoize particles and beams to prevent recreation on every render
+  const particles = useMemo(() => {
+    return Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      delay: Math.random() * 5,
+      duration: 10 + Math.random() * 10,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 3 + Math.random() * 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }));
+  }, []);
 
-  const lightBeams = Array.from({ length: 8 }, (_, i) => ({
-    id: i,
-    delay: Math.random() * 5,
-    duration: 15 + Math.random() * 10,
-    x: Math.random() * 100,
-    rotation: Math.random() * 30 - 15,
-  }));
+  const lightBeams = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      delay: Math.random() * 5,
+      duration: 15 + Math.random() * 10,
+      x: Math.random() * 100,
+      rotation: Math.random() * 30 - 15,
+    }));
+  }, []);
 
   return (
     <>

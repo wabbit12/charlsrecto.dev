@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-export default function ProjectCard({ project }) {
+function ProjectCard({ project }) {
   return (
     <motion.article
       whileHover={{ y: -6 }}
@@ -52,3 +53,4 @@ export default function ProjectCard({ project }) {
   );
 }
 
+export default memo(ProjectCard);
