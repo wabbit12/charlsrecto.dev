@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Reveal from './Reveal';
 import { motion } from 'framer-motion';
 import profilePhoto from '../assets/images/profile.JPG';
 
 export default function Hero() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = profilePhoto;
+    img.onload = () => setImageLoaded(true);
+  }, []);
   return (
     <section id="top" className="section pt-0 sm:pt-0 lg:pt-0 min-h-screen flex flex-col justify-center relative">
       <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] lg:grid-rows-[auto_1fr] gap-8 sm:gap-10 lg:gap-12 lg:gap-16 items-start mb-16 sm:mb-20 lg:mb-24">
@@ -44,13 +52,6 @@ export default function Hero() {
         <Reveal className="relative w-full lg:w-auto lg:row-start-1 lg:row-end-3 lg:col-start-2 lg:col-end-3 lg:self-center" delay={0.1}>
           <motion.div
             className="relative w-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-none mx-auto lg:mx-0"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{
-              scale: 1.02,
-              transition: { duration: 0.3 },
-            }}
             style={{
               perspective: '1000px',
               transformStyle: 'preserve-3d',
@@ -64,10 +65,38 @@ export default function Hero() {
             />
 
             {/* Photo container with 3D depth */}
-            <div
+            <motion.div
               className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl"
+              initial={{ 
+                rotateY: -90,
+                rotateX: 0,
+                scale: 0.8,
+                opacity: imageLoaded ? 1 : 0
+              }}
+              animate={imageLoaded ? { 
+                rotateY: -8,
+                rotateX: 7,
+                scale: 1,
+                opacity: 1
+              } : {
+                rotateY: -90,
+                rotateX: 0,
+                scale: 0.8,
+                opacity: 0
+              }}
+              transition={{ 
+                opacity: { duration: 0.1 },
+                rotateY: { duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] },
+                rotateX: { duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] },
+                scale: { duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }
+              }}
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.3 },
+              }}
               style={{
-                transform: 'perspective(1000px) rotateY(-5deg) rotateX(5deg)',
+                transformStyle: 'preserve-3d',
+                perspective: '1000px',
                 boxShadow: `
       0 20px 40px rgba(0, 0, 0, 0.4),
       0 40px 80px rgba(0, 0, 0, 0.3),
@@ -78,20 +107,22 @@ export default function Hero() {
               }}
             >
               {/* Profile Photo */}
-              <div className="w-full aspect-[3/4] overflow-hidden">
+              <div className="w-full aspect-[3/4] overflow-hidden" style={{ backfaceVisibility: 'visible' }}>
                 <img 
                   src={profilePhoto} 
                   alt="Charls Dave Recto" 
                   className="w-full h-full object-cover"
-                  decoding="async"
+                  loading="eager"
                   fetchPriority="high"
+                  onLoad={() => setImageLoaded(true)}
+                  style={{ backfaceVisibility: 'visible', transform: 'translateZ(0)' }}
                 />
               </div>
 
               {/* Floating accent elements */}
               <div className="absolute top-2 right-2 sm:top-4 sm:right-4 w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-primary animate-pulse" />
               <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-secondary animate-pulse" style={{ animationDelay: '0.5s' }} />
-            </div>
+            </motion.div>
           </motion.div>
         </Reveal>
 
