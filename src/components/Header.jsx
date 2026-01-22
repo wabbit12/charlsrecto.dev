@@ -135,22 +135,25 @@ export default function Header() {
               
               // If not on home page, navigate to home first
               if (location.pathname !== '/') {
-                navigate(`/#${sectionId}`);
-                // Wait for navigation, then scroll
+                navigate('/');
+                // Wait for navigation, then scroll and clear hash
                 setTimeout(() => {
                   const element = document.getElementById(sectionId);
                   if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
                     setActiveSection(item.href);
+                    // Clear any hash from URL
+                    window.history.replaceState(null, '', '/');
                   }
                 }, 100);
               } else {
-                // Already on home page, update hash and scroll
-                window.history.pushState(null, '', item.href);
+                // Already on home page, scroll without updating URL hash
                 const element = document.getElementById(sectionId);
                 if (element) {
                   element.scrollIntoView({ behavior: 'smooth' });
                   setActiveSection(item.href);
+                  // Clear any existing hash from URL
+                  window.history.replaceState(null, '', '/');
                 }
               }
             };
@@ -179,21 +182,24 @@ export default function Header() {
             
             // If not on home page, navigate to home first
             if (location.pathname !== '/') {
-              navigate(`/#${sectionId}`);
+              navigate('/');
               setTimeout(() => {
                 const element = document.getElementById(sectionId);
                 if (element) {
                   element.scrollIntoView({ behavior: 'smooth' });
                   setActiveSection('#contact');
+                  // Clear any hash from URL
+                  window.history.replaceState(null, '', '/');
                 }
               }, 100);
             } else {
-              // Already on home page, update hash and scroll
-              window.history.pushState(null, '', '#contact');
+              // Already on home page, scroll without updating URL hash
               const element = document.getElementById(sectionId);
               if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
                 setActiveSection('#contact');
+                // Clear any existing hash from URL
+                window.history.replaceState(null, '', '/');
               }
             }
           }}

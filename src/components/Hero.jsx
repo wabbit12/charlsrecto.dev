@@ -139,8 +139,9 @@ export default function Hero() {
                   const sectionId = 'projects';
                   const element = document.getElementById(sectionId);
                   if (element) {
-                    window.history.pushState(null, '', `#${sectionId}`);
                     element.scrollIntoView({ behavior: 'smooth' });
+                    // Clear any existing hash from URL
+                    window.history.replaceState(null, '', '/');
                   }
                 }}
                 className="group relative rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 transition overflow-hidden"
@@ -165,8 +166,9 @@ export default function Hero() {
                   const sectionId = 'contact';
                   const element = document.getElementById(sectionId);
                   if (element) {
-                    window.history.pushState(null, '', `#${sectionId}`);
                     element.scrollIntoView({ behavior: 'smooth' });
+                    // Clear any existing hash from URL
+                    window.history.replaceState(null, '', '/');
                   }
                 }}
                 className="rounded-full border-2 border-white/20 px-6 py-3 text-sm font-semibold text-white hover:border-primary/60 hover:text-primary transition"
