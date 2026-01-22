@@ -11,6 +11,9 @@ export default function Home() {
   const location = useLocation();
 
   useEffect(() => {
+    // Always ensure we start at top on mount (prevents browser scroll restoration)
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
     // Handle hash navigation on page load/refresh - scroll to section then clear hash
     if (location.hash) {
       const sectionId = location.hash.substring(1); // Remove the #
@@ -18,7 +21,11 @@ export default function Home() {
       if (element) {
         // Small delay to ensure DOM is ready
         const timer = setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Use scrollIntoView which respects CSS scroll-margin-top
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
           // Clear hash after scrolling starts to prevent it from persisting on refresh
           setTimeout(() => {
             window.history.replaceState(null, '', '/');

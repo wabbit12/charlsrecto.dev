@@ -10,6 +10,18 @@ const navItems = [
   { href: '#contact', label: 'Contact' },
 ];
 
+// Helper function to scroll to section - CSS scroll-mt handles the offset
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId);
+  if (!element) return;
+  
+  // Use scrollIntoView which respects CSS scroll-margin-top
+  element.scrollIntoView({ 
+    behavior: 'smooth',
+    block: 'start'
+  });
+};
+
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -138,23 +150,17 @@ export default function Header() {
                 navigate('/');
                 // Wait for navigation, then scroll and clear hash
                 setTimeout(() => {
-                  const element = document.getElementById(sectionId);
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    setActiveSection(item.href);
-                    // Clear any hash from URL
-                    window.history.replaceState(null, '', '/');
-                  }
+                  scrollToSection(sectionId);
+                  setActiveSection(item.href);
+                  // Clear any hash from URL
+                  window.history.replaceState(null, '', '/');
                 }, 100);
               } else {
                 // Already on home page, scroll without updating URL hash
-                const element = document.getElementById(sectionId);
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                  setActiveSection(item.href);
-                  // Clear any existing hash from URL
-                  window.history.replaceState(null, '', '/');
-                }
+                scrollToSection(sectionId);
+                setActiveSection(item.href);
+                // Clear any existing hash from URL
+                window.history.replaceState(null, '', '/');
               }
             };
 
@@ -184,23 +190,17 @@ export default function Header() {
             if (location.pathname !== '/') {
               navigate('/');
               setTimeout(() => {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                  setActiveSection('#contact');
-                  // Clear any hash from URL
-                  window.history.replaceState(null, '', '/');
-                }
+                scrollToSection(sectionId);
+                setActiveSection('#contact');
+                // Clear any hash from URL
+                window.history.replaceState(null, '', '/');
               }, 100);
             } else {
               // Already on home page, scroll without updating URL hash
-              const element = document.getElementById(sectionId);
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-                setActiveSection('#contact');
-                // Clear any existing hash from URL
-                window.history.replaceState(null, '', '/');
-              }
+              scrollToSection(sectionId);
+              setActiveSection('#contact');
+              // Clear any existing hash from URL
+              window.history.replaceState(null, '', '/');
             }
           }}
           className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 transition cursor-pointer"

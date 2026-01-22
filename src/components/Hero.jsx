@@ -139,7 +139,11 @@ export default function Hero() {
                   const sectionId = 'projects';
                   const element = document.getElementById(sectionId);
                   if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Use scrollIntoView which respects CSS scroll-margin-top
+                    element.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
                     // Clear any existing hash from URL
                     window.history.replaceState(null, '', '/');
                   }
@@ -166,7 +170,11 @@ export default function Hero() {
                   const sectionId = 'contact';
                   const element = document.getElementById(sectionId);
                   if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Use scrollIntoView which respects CSS scroll-margin-top
+                    element.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
                     // Clear any existing hash from URL
                     window.history.replaceState(null, '', '/');
                   }
