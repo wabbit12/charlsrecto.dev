@@ -12,6 +12,11 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
   useEffect(() => {
     // Handle URLs with &nbsp or other invalid characters
     const currentPath = location.pathname + location.search + location.hash;
