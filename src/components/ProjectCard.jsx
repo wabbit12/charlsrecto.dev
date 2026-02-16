@@ -3,16 +3,29 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 function ProjectCard({ project }) {
+  const isExternal = !!project.externalLink;
+  const linkProps = isExternal
+    ? {
+        href: project.externalLink,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      }
+    : {
+        to: `/projects/${project.slug}`,
+      };
+
+  const LinkComponent = isExternal ? 'a' : Link;
+
   return (
     <motion.article
       whileHover={{ y: -6 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
       className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 shadow-lg hover:shadow-primary/30 h-full"
     >
-      <Link
-        to={`/projects/${project.slug}`}
+      <LinkComponent
+        {...linkProps}
         className="block h-full flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-        aria-label={`Learn more about ${project.title}`}
+        aria-label={isExternal ? `Visit ${project.title}` : `Learn more about ${project.title}`}
       >
         <div className="relative aspect-[16/10] bg-gradient-to-br from-primary/40 via-slate-900 to-secondary/30 overflow-hidden flex items-center justify-center flex-shrink-0">
           {project.thumbnail ? (
@@ -44,11 +57,11 @@ function ProjectCard({ project }) {
           </div>
           <div className="pt-2 mt-auto">
             <span className="text-sm font-semibold text-primary group-hover:text-white transition">
-              Learn more →
+              {isExternal ? 'Visit site →' : 'Learn more →'}
             </span>
           </div>
         </div>
-      </Link>
+      </LinkComponent>
     </motion.article>
   );
 }

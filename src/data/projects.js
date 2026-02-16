@@ -25,7 +25,65 @@ import dictionaryThumbnail from '../assets/images/dictionary/dictionary-thumbnai
 import dictionaryMain from '../assets/images/dictionary/main-dictionary.png';
 import dictionaryResult from '../assets/images/dictionary/result.png';
 
+import flowlaunchThumbnail from '../assets/images/FlowLaunch/flowlaunch.JPG';
+import nightwaveThumbnail from '../assets/images/NightWave/nightwave.JPG';
+import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
+
 const projects = [
+  {
+    slug: 'flowlaunch',
+    title: 'FlowLaunch',
+    description:
+      'AI-powered landing page and funnel studio for course creators and SaaS founders.',
+    longDescription:
+      'An AI-powered landing page and funnel studio for course creators and SaaS founders. Describe your offer once, and we generate a responsive, on-brand funnel — headlines, sections, layout, and all.',
+    role: 'Full-Stack Developer',
+    tech: ['React', 'Next.js', 'AI', 'Tailwind CSS'],
+    year: '2026',
+    thumbnail: flowlaunchThumbnail,
+    externalLink: 'https://flowlaunch-five.vercel.app/',
+    highlights: [
+      'AI-powered funnel generation from a single description',
+      'Responsive, on-brand landing pages and sections',
+      'Built for course creators and SaaS founders',
+    ],
+  },
+  {
+    slug: 'nightwave',
+    title: 'NightWave',
+    description:
+      'A studio that helps SaaS, fintech, and creative platforms ship dark, modern marketing sites.',
+    longDescription:
+      'A small studio that helps SaaS, fintech, and creative platforms ship dark, modern marketing sites that look as sharp as their product. We handle product shots, motion, and the tiny UI details that make your launch feel intentional.',
+    role: 'Full-Stack Developer',
+    tech: ['React', 'Motion Design', 'Framer Motion', 'Tailwind CSS'],
+    year: '2026',
+    thumbnail: nightwaveThumbnail,
+    externalLink: 'https://nightwave-five.vercel.app/',
+    highlights: [
+      'Dark, modern marketing sites for SaaS and fintech',
+      'Product shots and motion design',
+      'Attention to tiny UI details',
+    ],
+  },
+  {
+    slug: 'harborbook',
+    title: 'HarborBook',
+    description:
+      'A friendly, mobile-first booking experience for service businesses.',
+    longDescription:
+      'HarborBook gives service businesses a friendly, mobile-first booking experience that feels great for clients to use. Capture leads, confirm appointments, send reminders, and get paid — without duct-taping five tools together.',
+    role: 'Full-Stack Developer',
+    tech: ['React', 'Node.js', 'Scheduling', 'Payments'],
+    year: '2026',
+    thumbnail: harborbookThumbnail,
+    externalLink: 'https://harborbook.vercel.app/',
+    highlights: [
+      'Mobile-first booking experience',
+      'Lead capture, appointments, and reminders',
+      'Integrated payment processing',
+    ],
+  },
   {
     slug: 'aqro-mobile-app',
     title:
