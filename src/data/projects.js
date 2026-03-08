@@ -28,8 +28,46 @@ import dictionaryResult from '../assets/images/dictionary/result.png';
 import flowlaunchThumbnail from '../assets/images/FlowLaunch/flowlaunch.JPG';
 import nightwaveThumbnail from '../assets/images/NightWave/nightwave.JPG';
 import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
+import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.JPG';
+import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG';
 
 const projects = [
+  {
+    slug: 'freshplate',
+    title: 'FreshPlate',
+    description:
+      'A modern recipe website with a clean interface for discovering and exploring culinary creations.',
+    longDescription:
+      'FreshPlate is a modern recipe website designed to help food enthusiasts discover, explore, and save their favorite recipes. Built with a clean, intuitive interface that makes browsing recipes a delightful experience.',
+    role: 'Full-Stack Developer',
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'API Integration'],
+    year: '2026',
+    thumbnail: freshplateThumbnail,
+    externalLink: 'https://fresh-plate-ashy.vercel.app/',
+    highlights: [
+      'Clean, modern recipe browsing interface',
+      'Intuitive search and filtering system',
+      'Responsive design for all devices',
+    ],
+  },
+  {
+    slug: 'coursecompass',
+    title: 'CourseCompass',
+    description:
+      'A comprehensive course platform with progress tracking and analytics for learners.',
+    longDescription:
+      'CourseCompass is a feature-rich learning platform where users can take various courses and track their progress with detailed analytics. Built to provide an engaging learning experience with real-time progress insights.',
+    role: 'Full-Stack Developer',
+    tech: ['React', 'Next.js', 'Analytics', 'Progress Tracking'],
+    year: '2026',
+    thumbnail: coursecompassThumbnail,
+    externalLink: 'https://course-compass-lovat.vercel.app/',
+    highlights: [
+      'Interactive course catalog and enrollment',
+      'Real-time progress tracking and analytics',
+      'User-friendly dashboard with insights',
+    ],
+  },
   {
     slug: 'flowlaunch',
     title: 'FlowLaunch',
