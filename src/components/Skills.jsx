@@ -7,13 +7,16 @@ const skills = [
   { name: 'Tailwind CSS' },
   { name: 'Java' },
   { name: 'PHP' },
+  { name: 'Laravel' },
   { name: 'Python' },
   { name: 'C#' },
   { name: 'Firebase' },
+  { name: 'Supabase' },
   { name: 'MySQL' },
   { name: 'MongoDB' },
   { name: 'Ionic' },
   { name: 'Angular' },
+  { name: 'Vue' },
   { name: 'React Native' },
   { name: 'Express' },
   { name: 'Node.js' },
@@ -42,6 +45,8 @@ const iconFor = (name) => {
       );
     case 'PHP':
       return <i className="devicon-php-plain colored text-3xl" />;
+    case 'Laravel':
+      return <i className="devicon-laravel-plain colored text-3xl" />;
     case 'Python':
       return (
         <img
@@ -72,6 +77,16 @@ const iconFor = (name) => {
           decoding="async"
         />
       );
+    case 'Supabase':
+      return (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg"
+          alt="Supabase"
+          className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
+        />
+      );
     case 'MySQL':
       return (
         <img
@@ -96,6 +111,8 @@ const iconFor = (name) => {
       return <i className="devicon-ionic-original colored text-3xl" />;
     case 'Angular':
       return <i className="devicon-angularjs-plain colored text-3xl" />;
+    case 'Vue':
+      return <i className="devicon-vuejs-plain colored text-3xl" />;
     case 'React Native':
       return <i className="devicon-reactnative-original-wordmark colored text-3xl" />;
     case 'Express':

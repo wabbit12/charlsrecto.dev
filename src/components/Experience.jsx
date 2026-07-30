@@ -2,6 +2,16 @@ import Reveal from './Reveal';
 
 const experience = [
   {
+    org: 'Cellumove',
+    title: 'Developer / After Sales Support',
+    dates: 'November 2025 – June 2026',
+    bullets: [
+      'Streamlined work processes by automating them in Sheets, META, and Shopify.',
+      'Developed a chatbot for customer support.',
+      'Created an automated emailing system.',
+    ],
+  },
+  {
     org: 'Department of Information and Communications Technology (DICT) – Regional Office II',
     title: 'Intern',
     dates: 'June 2024 – August 2024',
