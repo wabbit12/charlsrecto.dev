@@ -30,8 +30,27 @@ import nightwaveThumbnail from '../assets/images/NightWave/nightwave.JPG';
 import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
 import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.JPG';
 import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG';
+import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.png';
 
 const projects = [
+  {
+    slug: 'voyage',
+    title: 'Voyage',
+    description:
+      'Travel planning experience that helps wanderers map trips from inspiration to itinerary in a few taps.',
+    longDescription:
+      'Built for wanderers who plan far ahead and dreamers who book on a whim — Voyage turns “someday” into a dated itinerary in a few taps.',
+    role: 'Product Designer & Frontend Developer',
+    tech: ['React', 'Tailwind CSS', 'UI/UX', 'Travel Planning'],
+    year: '2026',
+    thumbnail: voyageThumbnail,
+    externalLink: 'https://voyage-travel-landing.vercel.app/voyage-travel-landing.html',
+    highlights: [
+      'Designed for spontaneous and planned travelers alike',
+      'Streamlined trip planning from inspiration to itinerary',
+      'Clean, immersive interface for browsing and booking experiences',
+    ],
+  },
   {
     slug: 'freshplate',
     title: 'FreshPlate',
