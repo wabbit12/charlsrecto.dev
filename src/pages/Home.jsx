@@ -11,29 +11,23 @@ export default function Home() {
   const location = useLocation();
 
   useEffect(() => {
-    // Always ensure we start at top on mount (prevents browser scroll restoration)
     window.scrollTo({ top: 0, behavior: 'instant' });
-    
-    // Handle hash navigation on page load/refresh - scroll to section then clear hash
+
     if (location.hash) {
-      const sectionId = location.hash.substring(1); // Remove the #
+      const sectionId = location.hash.substring(1);
       const element = document.getElementById(sectionId);
       if (element) {
-        // Small delay to ensure DOM is ready
         const timer = setTimeout(() => {
-          // Use scrollIntoView which respects CSS scroll-margin-top
-          element.scrollIntoView({ 
+          element.scrollIntoView({
             behavior: 'smooth',
-            block: 'start'
+            block: 'start',
           });
-          // Clear hash after scrolling starts to prevent it from persisting on refresh
           setTimeout(() => {
             window.history.replaceState(null, '', '/');
           }, 100);
         }, 100);
         return () => clearTimeout(timer);
       } else {
-        // If element not found, clear hash immediately
         window.history.replaceState(null, '', '/');
       }
     }
@@ -41,7 +35,7 @@ export default function Home() {
 
   try {
     return (
-      <div className="space-y-24">
+      <div className="space-y-16 sm:space-y-24">
         <Hero />
         <Projects />
         <Academic />
@@ -54,10 +48,8 @@ export default function Home() {
     console.error('Error rendering Home:', error);
     return (
       <div className="section pt-12">
-        <h1 className="text-white">Error loading content. Please check console.</h1>
+        <h1 className="text-ink">Error loading content. Please check console.</h1>
       </div>
     );
   }
 }
-
-

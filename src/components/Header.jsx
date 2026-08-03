@@ -10,27 +10,21 @@ const navItems = [
   { href: '#contact', label: 'Contact' },
 ];
 
-// Helper function to scroll to section - CSS scroll-mt handles the offset
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId);
   if (!element) return;
-  
-  // Use scrollIntoView which respects CSS scroll-margin-top
-  element.scrollIntoView({ 
-    behavior: 'smooth',
-    block: 'start'
-  });
+  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isProjectsPage = location.pathname.startsWith('/projects');
   const hash = location.hash || '';
 
-  // Update active section based on scroll position
   useEffect(() => {
     if (location.pathname !== '/') return;
 
@@ -40,8 +34,7 @@ export default function Header() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY;
-          
-          // If near the top, set active to #top (About)
+
           if (scrollPosition < 200) {
             setActiveSection('#top');
             ticking = false;
@@ -50,27 +43,27 @@ export default function Header() {
 
           const sections = navItems
             .map((item) => item.href.substring(1))
-            .filter((id) => id !== 'top'); // Exclude 'top' from section detection
-          const scrollPositionWithOffset = scrollPosition + 200; // Offset for header
+            .filter((id) => id !== 'top');
+          const scrollPositionWithOffset = scrollPosition + 200;
           const windowHeight = window.innerHeight;
           const documentHeight = document.documentElement.scrollHeight;
 
-          // Check if we're near the bottom of the page (contact section)
           if (scrollPositionWithOffset + windowHeight >= documentHeight - 100) {
             setActiveSection('#contact');
             ticking = false;
             return;
           }
 
-          // Otherwise, find the section that's currently in view
           for (let i = sections.length - 1; i >= 0; i--) {
             const section = document.getElementById(sections[i]);
             if (section) {
               const sectionTop = section.offsetTop;
               const sectionBottom = sectionTop + section.offsetHeight;
-              
-              // Check if section is in viewport
-              if (scrollPositionWithOffset >= sectionTop - 100 && scrollPositionWithOffset < sectionBottom - 100) {
+
+              if (
+                scrollPositionWithOffset >= sectionTop - 100 &&
+                scrollPositionWithOffset < sectionBottom - 100
+              ) {
                 setActiveSection(`#${sections[i]}`);
                 ticking = false;
                 return;
@@ -83,7 +76,6 @@ export default function Header() {
       }
     };
 
-    // Set initial active section from hash
     if (hash) {
       setActiveSection(hash);
     } else {
@@ -94,15 +86,59 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname, hash]);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   const isActive = (href) => {
     if (isProjectsPage && href === '#projects') return true;
-    if (href === '#top' && location.pathname === '/' && (activeSection === '' || activeSection === '#top' || window.scrollY < 100)) return true;
+    if (
+      href === '#top' &&
+      location.pathname === '/' &&
+      (activeSection === '' || activeSection === '#top' || window.scrollY < 100)
+    )
+      return true;
     if (location.pathname === '/' && activeSection === href) return true;
     return false;
   };
 
+  const goToNav = (item) => {
+    const sectionId = item.href.substring(1);
+
+    if (sectionId === 'top') {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setActiveSection('');
+          window.history.pushState(null, '', '/');
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActiveSection('');
+        window.history.pushState(null, '', '/');
+      }
+      setMenuOpen(false);
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        scrollToSection(sectionId);
+        setActiveSection(item.href);
+        window.history.replaceState(null, '', '/');
+      }, 100);
+    } else {
+      scrollToSection(sectionId);
+      setActiveSection(item.href);
+      window.history.replaceState(null, '', '/');
+    }
+    setMenuOpen(false);
+  };
+
   return (
-    <header className="sticky top-0 z-30 bg-slate-950/80 backdrop-blur border-b border-white/5">
+    <header className="sticky top-0 z-30 border-x-0 border-t-0 !rounded-none glass">
       <div className="section flex items-center justify-between py-4">
         <Link
           to="/"
@@ -114,101 +150,116 @@ export default function Header() {
               window.history.pushState(null, '', '/');
             }
           }}
-          className="text-lg font-semibold text-white tracking-tight"
-          style={{
-            fontFamily: "'Preospe', sans-serif",
-            textShadow: '0 0 3px rgba(255, 255, 255, 0.2), 0 0 6px rgba(255, 255, 255, 0.1)',
-          }}
+          className="font-brand text-lg sm:text-xl tracking-tight text-ink"
         >
           charlsrecto.dev
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm">
-          {navItems.map((item) => {
-            const handleClick = (e) => {
-              e.preventDefault();
-              const sectionId = item.href.substring(1); // Remove the #
-              
-              // Handle #top specially - scroll to top
-              if (sectionId === 'top') {
-                if (location.pathname !== '/') {
-                  navigate('/');
-                  setTimeout(() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    setActiveSection('');
-                    window.history.pushState(null, '', '/');
-                  }, 100);
-                } else {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                  setActiveSection('');
-                  window.history.pushState(null, '', '/');
-                }
-                return;
-              }
-              
-              // If not on home page, navigate to home first
-              if (location.pathname !== '/') {
-                navigate('/');
-                // Wait for navigation, then scroll and clear hash
-                setTimeout(() => {
-                  scrollToSection(sectionId);
-                  setActiveSection(item.href);
-                  // Clear any hash from URL
-                  window.history.replaceState(null, '', '/');
-                }, 100);
-              } else {
-                // Already on home page, scroll without updating URL hash
-                scrollToSection(sectionId);
-                setActiveSection(item.href);
-                // Clear any existing hash from URL
-                window.history.replaceState(null, '', '/');
-              }
-            };
 
-            return (
+        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={(e) => {
+                e.preventDefault();
+                goToNav(item);
+              }}
+              className={`relative pb-0.5 transition-colors cursor-pointer ${
+                isActive(item.href)
+                  ? 'text-ink after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-ink'
+                  : 'text-muted hover:text-ink'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              goToNav({ href: '#contact' });
+            }}
+            className="hidden sm:inline-flex items-center rounded-xl bg-ink text-paper px-4 py-2 text-sm font-medium hover:bg-white/85 transition-colors cursor-pointer"
+          >
+            Let&apos;s talk
+          </a>
+          <button
+            type="button"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/20 text-ink"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-5 w-5"
+                aria-hidden
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-5 w-5"
+                aria-hidden
+              >
+                <path d="M4 6h16" />
+                <path d="M4 12h16" />
+                <path d="M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <nav className="lg:hidden border-t border-white/10 !rounded-none border-x-0 bg-white/[0.03] backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+          <div className="section py-4 flex flex-col gap-1">
+            {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={handleClick}
-                className={`pb-1 transition-all duration-300 cursor-pointer relative ${
-                  isActive(item.href)
-                    ? 'text-white border-b-2 border-primary nav-link-active'
-                    : 'text-slate-200 hover:text-white nav-link-hover'
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToNav(item);
+                }}
+                className={`py-2.5 text-base font-medium cursor-pointer ${
+                  isActive(item.href) ? 'text-ink' : 'text-muted'
                 }`}
               >
                 {item.label}
               </a>
-            );
-          })}
+            ))}
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                goToNav({ href: '#contact' });
+              }}
+              className="mt-2 inline-flex w-fit items-center rounded-xl bg-ink text-paper px-4 py-2 text-sm font-medium cursor-pointer"
+            >
+              Let&apos;s talk
+            </a>
+          </div>
         </nav>
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault();
-            const sectionId = 'contact';
-            
-            // If not on home page, navigate to home first
-            if (location.pathname !== '/') {
-              navigate('/');
-              setTimeout(() => {
-                scrollToSection(sectionId);
-                setActiveSection('#contact');
-                // Clear any hash from URL
-                window.history.replaceState(null, '', '/');
-              }, 100);
-            } else {
-              // Already on home page, scroll without updating URL hash
-              scrollToSection(sectionId);
-              setActiveSection('#contact');
-              // Clear any existing hash from URL
-              window.history.replaceState(null, '', '/');
-            }
-          }}
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 transition cursor-pointer"
-        >
-          Let&apos;s talk
-        </a>
-      </div>
+      )}
     </header>
   );
 }
-

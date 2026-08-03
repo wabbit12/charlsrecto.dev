@@ -25,35 +25,37 @@ const experience = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="section scroll-mt-24 space-y-6">
+    <section id="experience" className="section scroll-mt-24 py-4">
       <Reveal>
-        <p className="text-sm uppercase tracking-[0.2em] text-primary">
-          Experience
-        </p>
-      </Reveal>
-      <Reveal delay={0.06}>
-        <h2 className="text-3xl sm:text-4xl font-bold">Where I worked</h2>
+        <div className="border-t border-white/15 pt-10 mb-10">
+          <p className="text-xs uppercase tracking-[0.18em] text-muted mb-2">
+            Experience
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+            Where I worked
+          </h2>
+        </div>
       </Reveal>
 
       <div className="grid gap-4">
         {experience.map((item, idx) => (
-          <Reveal key={item.org} delay={0.08 + 0.04 * idx}>
-            <div className="glass rounded-2xl border-white/10 p-6 sm:p-8 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+          <Reveal key={item.org} delay={0.06 * idx}>
+            <div className="glass-panel p-6 sm:p-8 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                 <div className="space-y-1">
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  <h3 className="font-hero text-lg sm:text-xl font-bold text-ink">
                     {item.org}
                   </h3>
-                  <p className="text-slate-200 font-semibold">{item.title}</p>
+                  <p className="font-medium text-ink/80">{item.title}</p>
                 </div>
-                <span className="shrink-0 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200 border border-white/10">
+                <span className="shrink-0 text-xs font-medium text-muted tabular-nums border border-white/10 px-2.5 py-1">
                   {item.dates}
                 </span>
               </div>
-              <ul className="grid gap-3 text-slate-200">
+              <ul className="space-y-2 max-w-3xl">
                 {item.bullets.map((b) => (
-                  <li key={b} className="flex gap-3">
-                    <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
+                  <li key={b} className="flex gap-3 text-muted leading-relaxed">
+                    <span className="mt-2.5 h-1 w-1 shrink-0 bg-ink" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -65,5 +67,3 @@ export default function Experience() {
     </section>
   );
 }
-
-

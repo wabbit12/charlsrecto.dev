@@ -5,15 +5,15 @@ import Footer from './components/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
 import { Route, Routes } from 'react-router-dom';
 
-// Code splitting for better initial load performance
 const Home = lazy(() => import('./pages/Home'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 
-// Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-slate-400">Loading...</div>
+  <div className="min-h-[60vh] flex items-center justify-center">
+    <div className="font-display text-sm tracking-widest uppercase text-muted">
+      Loading
+    </div>
   </div>
 );
 
@@ -21,31 +21,26 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
 
   useEffect(() => {
-    // Handle URLs with &nbsp or other invalid characters
     const currentPath = location.pathname + location.search + location.hash;
-    
-    // Check if URL contains &nbsp or invalid characters
-    const hasInvalidChars = currentPath.includes('&nbsp') || 
-                           currentPath.includes('%26nbsp') ||
-                           currentPath.includes('%c2%a0') ||
-                           currentPath.includes('%C2%A0');
-    
-    // Also check if pathname is invalid (not a valid route)
-    const isValidPath = location.pathname === '/' || 
-                       location.pathname.startsWith('/projects/') || 
-                       location.pathname === '/dashboard';
-    
-    // If URL contains invalid characters or invalid path, redirect to home
-    // Use setTimeout to allow catch-all route to render content first
+
+    const hasInvalidChars =
+      currentPath.includes('&nbsp') ||
+      currentPath.includes('%26nbsp') ||
+      currentPath.includes('%c2%a0') ||
+      currentPath.includes('%C2%A0');
+
+    const isValidPath =
+      location.pathname === '/' ||
+      location.pathname.startsWith('/projects/') ||
+      location.pathname === '/dashboard';
+
     if (hasInvalidChars || !isValidPath) {
       const timer = setTimeout(() => {
-        // Only redirect if we're not already on clean home
         if (location.pathname !== '/' || location.search || location.hash) {
           window.history.replaceState(null, '', '/');
           navigate('/', { replace: true });
@@ -56,24 +51,29 @@ function App() {
   }, [location.pathname, location.search, location.hash, navigate]);
 
   return (
-    <div className="min-h-screen text-slate-50 relative">
+    <div className="min-h-screen text-ink relative">
       <AnimatedBackground />
-      <div className="fixed inset-0 bg-slate-950/70 pointer-events-none" style={{ zIndex: -1 }} />
-      <Header />
-      <main className="pb-24 relative z-10 min-h-screen">
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects/:slug" element={<ProjectPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </Suspense>
-      </main>
-      <Footer />
+      {/* Light veil so glass can frost against the motion, without hiding it */}
+      <div
+        className="fixed inset-0 bg-paper/40 pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
+      <div className="relative" style={{ zIndex: 2 }}>
+        <Header />
+        <main className="pb-20 min-h-screen">
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects/:slug" element={<ProjectPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
 
 export default App;
-

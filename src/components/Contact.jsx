@@ -6,32 +6,42 @@ const GitHubIcon = () => (
 
 export default function Contact() {
   return (
-    <section id="contact" className="section scroll-mt-24 space-y-6">
-      <p className="text-sm uppercase tracking-[0.2em] text-primary">Contact</p>
-      <h2 className="text-3xl sm:text-4xl font-bold">Let&apos;s work together</h2>
-      <div className="glass rounded-2xl border-white/10 p-6 sm:p-8 space-y-6">
-        <p className="text-slate-200 leading-relaxed">
-          Have a project in mind or need help shipping a feature? Send a quick
-          brief and I&apos;ll respond within one business day.
+    <section id="contact" className="section scroll-mt-24 py-4 pb-8">
+      <div className="border-t border-white/15 pt-10">
+        <p className="text-xs uppercase tracking-[0.18em] text-muted mb-2">
+          Contact
         </p>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1">
-            <p className="text-sm text-slate-400">Email</p>
-            <a
-              href="mailto:rectocharlsdave@gmail.com"
-              className="text-lg font-semibold text-primary hover:text-white transition"
-            >
-              rectocharlsdave@gmail.com
-            </a>
-          </div>
-          <div className="space-y-1">
-            <p className="text-sm text-slate-400">Social</p>
-            <div className="flex gap-3">
+        <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-8">
+          Let&apos;s work together
+        </h2>
+
+        <div className="glass-panel p-6 sm:p-10 space-y-8">
+          <p className="text-muted leading-relaxed max-w-2xl">
+            Have a project in mind or need help shipping a feature? Send a quick
+            brief and I&apos;ll respond within one business day.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-8 border-t border-white/10 pt-8">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted">
+                Email
+              </p>
+              <a
+                href="mailto:rectocharlsdave@gmail.com"
+                className="text-lg sm:text-xl font-display font-bold text-ink hover:underline underline-offset-4 break-all"
+              >
+                rectocharlsdave@gmail.com
+              </a>
+            </div>
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted">
+                Social
+              </p>
               <a
                 href="https://github.com/wabbit12"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 text-slate-200 hover:text-white"
+                className="inline-flex items-center gap-2 text-ink font-medium hover:underline underline-offset-4"
               >
                 <GitHubIcon />
                 GitHub
@@ -43,4 +53,3 @@ export default function Contact() {
     </section>
   );
 }
-

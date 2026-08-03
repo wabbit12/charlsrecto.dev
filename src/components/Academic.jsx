@@ -17,28 +17,31 @@ const education = [
 
 export default function Academic() {
   return (
-    <section id="academic" className="section scroll-mt-24 space-y-6">
+    <section id="academic" className="section scroll-mt-24 py-4">
       <Reveal>
-        <p className="text-sm uppercase tracking-[0.2em] text-primary">
-          Academic Profile
-        </p>
+        <div className="border-t border-white/15 pt-10 mb-10">
+          <p className="text-xs uppercase tracking-[0.18em] text-muted mb-2">
+            Academic
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
+            Education
+          </h2>
+        </div>
       </Reveal>
-      <Reveal delay={0.06}>
-        <h2 className="text-3xl sm:text-4xl font-bold">Education</h2>
-      </Reveal>
+
       <div className="grid gap-4">
         {education.map((item, idx) => (
-          <Reveal key={item.school} delay={0.08 + 0.04 * idx}>
-            <div className="glass rounded-2xl border-white/10 p-6 sm:p-8">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+          <Reveal key={item.school} delay={0.06 * idx}>
+            <div className="glass-panel p-6 sm:p-8">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                 <div className="space-y-1">
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">
+                  <h3 className="font-hero text-lg sm:text-xl font-bold text-ink">
                     {item.school}
                   </h3>
-                  <p className="text-slate-200">{item.program}</p>
-                  <p className="text-slate-300">{item.honor}</p>
+                  <p className="text-ink/80">{item.program}</p>
+                  <p className="text-muted text-sm">{item.honor}</p>
                 </div>
-                <span className="shrink-0 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200 border border-white/10">
+                <span className="shrink-0 text-xs font-medium text-muted tabular-nums border border-white/10 px-2.5 py-1">
                   {item.years}
                 </span>
               </div>
@@ -49,5 +52,3 @@ export default function Academic() {
     </section>
   );
 }
-
-

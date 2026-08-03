@@ -8,23 +8,19 @@ function PhoneFrame({ children, label, onClick }) {
   return (
     <div className="flex justify-center">
       <div className="relative w-full max-w-[280px] mx-auto">
-        {/* Phone frame */}
         <div
-          className="relative bg-slate-800 rounded-[2.5rem] p-2 shadow-2xl border-2 border-slate-700 cursor-pointer hover:scale-105 transition-transform"
+          className="relative bg-line p-2 border border-white/15 cursor-pointer hover:scale-[1.02] transition-transform"
           onClick={onClick}
         >
-          {/* Notch */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-800 rounded-b-2xl border-x-2 border-b-2 border-slate-700 z-10" />
-          {/* Screen */}
-          <div className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/19.5]">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-5 bg-line z-10" />
+          <div className="relative bg-paper overflow-hidden aspect-[9/19.5]">
             {children}
           </div>
-          {/* Home indicator */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-600 rounded-full" />
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-white/30" />
         </div>
         {label && (
-          <div className="mt-4 text-center">
-            <span className="text-sm font-semibold text-slate-300">{label}</span>
+          <div className="mt-3 text-center">
+            <span className="text-sm font-medium text-muted">{label}</span>
           </div>
         )}
       </div>
@@ -38,7 +34,6 @@ function ImageModal({ image, isOpen, onClose }) {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  // Reset zoom and position when modal closes
   useEffect(() => {
     if (!isOpen) {
       setZoom(1);
@@ -49,14 +44,8 @@ function ImageModal({ image, isOpen, onClose }) {
 
   if (!image || typeof image === 'string') return null;
 
-  const handleZoomIn = () => {
-    setZoom((prev) => Math.min(prev + 0.25, 3));
-  };
-
-  const handleZoomOut = () => {
-    setZoom((prev) => Math.max(prev - 0.25, 0.5));
-  };
-
+  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.25, 3));
+  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.25, 0.5));
   const handleReset = () => {
     setZoom(1);
     setPosition({ x: 0, y: 0 });
@@ -78,102 +67,91 @@ function ImageModal({ image, isOpen, onClose }) {
     }
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  const handleMouseUp = () => setIsDragging(false);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={onClose}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={onClose}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.96, opacity: 0 }}
+            className="relative max-w-4xl w-full h-[85vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative max-w-4xl w-full h-[85vh] flex flex-col"
-              onClick={(e) => e.stopPropagation()}
+            <div
+              className="relative flex-1 overflow-auto glass-panel min-h-0"
+              onMouseDown={handleMouseDown}
+              style={{ cursor: zoom > 1 ? 'grab' : 'default' }}
             >
-              {/* Image container */}
-              <div
-                className="relative flex-1 overflow-auto rounded-lg bg-black/50 min-h-0"
-                onMouseDown={handleMouseDown}
-                style={{ cursor: zoom > 1 ? 'grab' : 'default' }}
+              <div className="flex items-center justify-center min-h-full p-4">
+                <img
+                  src={image.src}
+                  alt={image.label || 'Project screenshot'}
+                  className="max-w-full max-h-full object-contain"
+                  style={{
+                    transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                    transformOrigin: 'center center',
+                    transition: isDragging ? 'none' : 'transform 0.2s',
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="absolute top-4 right-4 flex flex-col gap-2">
+              <button
+                onClick={onClose}
+                className="w-10 h-10 bg-ink text-paper border border-white/20 flex items-center justify-center text-xl font-bold hover:bg-white/85 transition"
+                aria-label="Close"
               >
-                <div className="flex items-center justify-center min-h-full p-4">
-                  <img
-                    src={image.src}
-                    alt={image.label || 'Project screenshot'}
-                    className="max-w-full max-h-full object-contain"
-                    style={{
-                      transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-                      transformOrigin: 'center center',
-                      transition: isDragging ? 'none' : 'transform 0.2s',
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Controls */}
-              <div className="absolute top-4 right-4 flex flex-col gap-2">
-                {/* Close button */}
+                ×
+              </button>
+              <div className="flex flex-col gap-1 glass-panel p-1">
                 <button
-                  onClick={onClose}
-                  className="w-10 h-10 rounded-full bg-red-600/90 hover:bg-red-600 border-2 border-white/30 backdrop-blur-sm flex items-center justify-center text-white text-xl font-bold transition shadow-lg"
-                  aria-label="Close"
+                  onClick={handleZoomIn}
+                  className="w-8 h-8 hover:bg-white/10 flex items-center justify-center text-ink text-lg font-bold transition"
+                  aria-label="Zoom in"
                 >
-                  ×
+                  +
                 </button>
-                {/* Zoom controls */}
-                <div className="flex flex-col gap-2 bg-black/70 backdrop-blur-sm rounded-lg p-2 border border-white/20">
+                <button
+                  onClick={handleZoomOut}
+                  className="w-8 h-8 hover:bg-white/10 flex items-center justify-center text-ink text-lg font-bold transition"
+                  aria-label="Zoom out"
+                >
+                  −
+                </button>
+                {zoom !== 1 && (
                   <button
-                    onClick={handleZoomIn}
-                    className="w-8 h-8 rounded bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold transition"
-                    aria-label="Zoom in"
+                    onClick={handleReset}
+                    className="w-8 h-8 hover:bg-white/10 flex items-center justify-center text-ink text-xs font-semibold transition"
+                    aria-label="Reset zoom"
                   >
-                    +
+                    ↺
                   </button>
-                  <button
-                    onClick={handleZoomOut}
-                    className="w-8 h-8 rounded bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg font-bold transition"
-                    aria-label="Zoom out"
-                  >
-                    −
-                  </button>
-                  {zoom !== 1 && (
-                    <button
-                      onClick={handleReset}
-                      className="w-8 h-8 rounded bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs font-semibold transition"
-                      aria-label="Reset zoom"
-                    >
-                      ↺
-                    </button>
-                  )}
-                </div>
+                )}
               </div>
+            </div>
 
-              {/* Label */}
-              {image.label && (
-                <div className="mt-4 text-center">
-                  <span className="inline-block text-sm font-semibold text-white bg-black/70 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
-                    {image.label}
-                  </span>
-                </div>
-              )}
-            </motion.div>
+            {image.label && (
+              <div className="mt-4 text-center">
+                <span className="inline-block text-sm font-medium text-ink glass-panel px-4 py-2">
+                  {image.label}
+                </span>
+              </div>
+            )}
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
@@ -182,11 +160,8 @@ function ImageModal({ image, isOpen, onClose }) {
 function ProjectImage({ image, isMobile = false, onImageClick }) {
   if (typeof image === 'string') {
     return (
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-primary/30 via-slate-900 to-secondary/25 aspect-[16/10]">
-        <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
-        <div className="absolute bottom-3 left-3 text-xs font-semibold text-slate-200/90 rounded-full bg-black/30 px-3 py-1 border border-white/10">
-          {image}
-        </div>
+      <div className="relative overflow-hidden glass-panel aspect-[16/10] flex items-end p-3">
+        <span className="text-xs font-medium text-muted">{image}</span>
       </div>
     );
   }
@@ -207,11 +182,11 @@ function ProjectImage({ image, isMobile = false, onImageClick }) {
 
   return (
     <div className="space-y-2 flex flex-col items-center">
-      <div className="border border-white/10 rounded-lg p-4 bg-slate-900/20 flex items-center justify-center w-full h-72">
+      <div className="glass-panel p-3 flex items-center justify-center w-full h-72">
         <img
           src={image.src}
           alt={image.label || 'Project screenshot'}
-          className="w-full h-full cursor-pointer hover:opacity-90 transition-opacity object-contain"
+          className="w-full h-full cursor-pointer hover:opacity-80 transition-opacity object-contain"
           onClick={() => onImageClick?.(image)}
           loading="lazy"
           decoding="async"
@@ -219,7 +194,7 @@ function ProjectImage({ image, isMobile = false, onImageClick }) {
       </div>
       {image.label && (
         <div className="text-center">
-          <span className="text-sm font-semibold text-slate-300">{image.label}</span>
+          <span className="text-sm font-medium text-muted">{image.label}</span>
         </div>
       )}
     </div>
@@ -234,14 +209,14 @@ export default function ProjectPage() {
   if (!project) {
     return (
       <section className="section pt-12">
-        <div className="glass rounded-2xl border-white/10 p-6 sm:p-8 space-y-4">
-          <h1 className="text-2xl font-bold">Project not found</h1>
-          <p className="text-slate-300">
+        <div className="glass-panel p-6 sm:p-8 space-y-4">
+          <h1 className="font-display text-2xl font-bold">Project not found</h1>
+          <p className="text-muted">
             That project doesn&apos;t exist yet. Head back to the projects list.
           </p>
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-white transition"
+            className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:underline underline-offset-4"
           >
             ← Back to projects
           </Link>
@@ -251,31 +226,31 @@ export default function ProjectPage() {
   }
 
   return (
-    <section className="section pt-12 sm:pt-16 space-y-10">
+    <section className="section pt-12 sm:pt-16 space-y-12">
       <Reveal>
-        <div className="space-y-4">
+        <div className="space-y-5 border-b border-white/15 pb-10">
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-white transition"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-ink transition"
           >
             ← Back to projects
           </Link>
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               {project.title}
             </h1>
-            <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200 border border-white/10">
+            <span className="text-sm text-muted tabular-nums border border-white/10 px-2 py-0.5">
               {project.year}
             </span>
           </div>
-          <p className="text-lg text-slate-300 max-w-3xl">
+          <p className="text-lg text-muted max-w-3xl leading-relaxed">
             {project.longDescription || project.description}
           </p>
-          <div className="flex flex-wrap gap-2 text-xs text-slate-200 pt-1">
+          <div className="flex flex-wrap gap-2 text-sm text-muted pt-1">
             {project.tech.map((item) => (
               <span
                 key={item}
-                className="rounded-full bg-slate-900/80 border border-white/5 px-3 py-1"
+                className="border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs"
               >
                 {item}
               </span>
@@ -285,24 +260,24 @@ export default function ProjectPage() {
       </Reveal>
 
       <Reveal delay={0.08}>
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold mb-12">Sample Screens</h2>
+        <div className="space-y-6">
+          <h2 className="font-display text-2xl font-bold">Sample screens</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {(project.images?.length ? project.images : ['Screenshot 1', 'Screenshot 2']).map(
-              (img, idx) => {
-                // Only aQRo should use mobile phone frames
-                const isMobileProject = project.slug === 'aqro-mobile-app';
-                
-                return (
-                  <ProjectImage
-                    key={typeof img === 'string' ? img : img.src || idx}
-                    image={img}
-                    isMobile={isMobileProject}
-                    onImageClick={setSelectedImage}
-                  />
-                );
-              },
-            )}
+            {(project.images?.length
+              ? project.images
+              : ['Screenshot 1', 'Screenshot 2']
+            ).map((img, idx) => {
+              const isMobileProject = project.slug === 'aqro-mobile-app';
+
+              return (
+                <ProjectImage
+                  key={typeof img === 'string' ? img : img.src || idx}
+                  image={img}
+                  isMobile={isMobileProject}
+                  onImageClick={setSelectedImage}
+                />
+              );
+            })}
           </div>
         </div>
       </Reveal>
@@ -310,19 +285,17 @@ export default function ProjectPage() {
       <ImageModal
         image={selectedImage}
         isOpen={!!selectedImage}
-        onClose={() => {
-          setSelectedImage(null);
-        }}
+        onClose={() => setSelectedImage(null)}
       />
 
       {!!project.highlights?.length && (
         <Reveal delay={0.12}>
-          <div className="glass rounded-2xl border-white/10 p-6 sm:p-8 space-y-4">
-            <h2 className="text-2xl font-bold">Highlights</h2>
-            <ul className="grid gap-3 text-slate-200">
+          <div className="glass-panel p-6 sm:p-8 space-y-4">
+            <h2 className="font-display text-2xl font-bold">Highlights</h2>
+            <ul className="grid gap-3 text-muted">
               {project.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
+                  <span className="mt-2.5 h-1 w-1 shrink-0 bg-ink" />
                   <span>{h}</span>
                 </li>
               ))}
@@ -333,5 +306,3 @@ export default function ProjectPage() {
     </section>
   );
 }
-
-
