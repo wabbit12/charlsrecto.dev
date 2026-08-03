@@ -35,13 +35,15 @@ export default function Home() {
 
   try {
     return (
-      <div className="space-y-16 sm:space-y-24">
+      <div>
         <Hero />
-        <Projects />
-        <Academic />
-        <Experience />
-        <Skills />
-        <Contact />
+        <div className="mt-6 sm:mt-10 space-y-16 sm:space-y-24">
+          <Projects />
+          <Academic />
+          <Experience />
+          <Skills />
+          <Contact />
+        </div>
       </div>
     );
   } catch (error) {

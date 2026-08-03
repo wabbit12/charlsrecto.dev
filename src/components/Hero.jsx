@@ -22,7 +22,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="section min-h-[calc(100vh-4.5rem)] flex flex-col justify-start pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20"
+      className="section flex flex-col justify-start pt-4 sm:pt-6 lg:pt-8 pb-6 sm:pb-8 lg:pb-10"
     >
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
         <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">

@@ -12,7 +12,7 @@ export default function Projects() {
   return (
     <section id="projects" className="section scroll-mt-24 py-4">
       <Reveal>
-        <div className="border-t border-white/15 pt-10 mb-10">
+        <div className="border-t border-white/15 pt-8 mb-8 sm:pt-10 sm:mb-10">
           <p className="text-xs uppercase tracking-[0.18em] text-muted mb-2">
             Selected work
           </p>
