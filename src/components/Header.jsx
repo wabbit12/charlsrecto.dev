@@ -138,7 +138,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-30 border-x-0 border-t-0 !rounded-none glass">
+    <header className="sticky top-0 z-30 border-0 !rounded-none bg-gradient-to-b from-paper/80 via-paper/50 to-transparent backdrop-blur-md">
       <div className="section flex items-center justify-between py-4">
         <Link
           to="/"
@@ -230,7 +230,7 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <nav className="lg:hidden border-t border-white/10 !rounded-none border-x-0 bg-white/[0.03] backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+        <nav className="lg:hidden border-0 !rounded-none bg-paper/70 backdrop-blur-md">
           <div className="section py-4 flex flex-col gap-1">
             {navItems.map((item) => (
               <a

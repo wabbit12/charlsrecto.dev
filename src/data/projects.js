@@ -31,8 +31,27 @@ import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
 import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.JPG';
 import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG';
 import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.png';
+import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.PNG';
 
 const projects = [
+  {
+    slug: 'verdura',
+    title: 'Verdura',
+    description:
+      'Breathe Natural. Bring calm, living greenery into your home. Discover house plants chosen for beauty, cleaner air, and everyday ease.',
+    longDescription:
+      'Breathe Natural. Bring calm, living greenery into your home. Discover house plants chosen for beauty, cleaner air, and everyday ease.',
+    role: 'Product Designer & Frontend Developer',
+    tech: ['React', 'Tailwind CSS', 'UI/UX', 'E-commerce'],
+    year: '2026',
+    thumbnail: verduraThumbnail,
+    externalLink: 'https://verdura-2qffkjgu2-wabbit12s-projects.vercel.app/',
+    highlights: [
+      'Curated house plants for beauty and cleaner air',
+      'Calm, nature-inspired shopping experience',
+      'Designed for everyday ease at home',
+    ],
+  },
   {
     slug: 'voyage',
     title: 'Voyage',
