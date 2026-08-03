@@ -9,14 +9,14 @@ function PhoneFrame({ children, label, onClick }) {
     <div className="flex justify-center">
       <div className="relative w-full max-w-[280px] mx-auto">
         <div
-          className="relative bg-line p-2 border border-white/15 cursor-pointer hover:scale-[1.02] transition-transform"
+          className="relative bg-[#1a1a1a] p-[10px] rounded-[2.25rem] border border-white/20 cursor-pointer hover:scale-[1.02] transition-transform shadow-[0_12px_40px_rgba(0,0,0,0.45)]"
           onClick={onClick}
         >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-5 bg-line z-10" />
-          <div className="relative bg-paper overflow-hidden aspect-[9/19.5]">
+          <div className="absolute top-[14px] left-1/2 -translate-x-1/2 w-[72px] h-[22px] bg-paper rounded-full z-10" />
+          <div className="relative bg-paper overflow-hidden aspect-[9/19.5] rounded-[1.75rem]">
             {children}
           </div>
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-white/30" />
+          <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/25" />
         </div>
         {label && (
           <div className="mt-3 text-center">
@@ -291,7 +291,7 @@ export default function ProjectPage() {
       {!!project.highlights?.length && (
         <Reveal delay={0.12}>
           <div className="glass-panel p-6 sm:p-8 space-y-4">
-            <h2 className="font-display text-2xl font-bold">Highlights</h2>
+            <h2 className="font-body text-2xl font-semibold tracking-tight">Highlights</h2>
             <ul className="grid gap-3 text-muted">
               {project.highlights.map((h) => (
                 <li key={h} className="flex gap-3">
