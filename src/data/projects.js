@@ -45,7 +45,7 @@ const projects = [
     tech: ['React', 'Tailwind CSS', 'UI/UX', 'E-commerce'],
     year: '2026',
     thumbnail: verduraThumbnail,
-    externalLink: 'https://verdura-2qffkjgu2-wabbit12s-projects.vercel.app/',
+    externalLink: 'https://verdura-beta.vercel.app/',
     highlights: [
       'Curated house plants for beauty and cleaner air',
       'Calm, nature-inspired shopping experience',
