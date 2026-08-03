@@ -37,7 +37,7 @@ export default function Home() {
     return (
       <div>
         <Hero />
-        <div className="mt-48 sm:mt-56 space-y-16 sm:space-y-24">
+        <div className="mt-20 sm:mt-56 space-y-16 sm:space-y-24">
           <Projects />
           <Academic />
           <Experience />
