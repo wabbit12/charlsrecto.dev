@@ -1,5 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Reveal from './Reveal';
+
+const MOBILE_LIMIT = 9;
 
 const skills = [
   { name: 'React' },
@@ -13,6 +15,7 @@ const skills = [
   { name: 'Firebase' },
   { name: 'Supabase' },
   { name: 'MySQL' },
+  { name: 'PostgreSQL' },
   { name: 'MongoDB' },
   { name: 'Ionic' },
   { name: 'Angular' },
@@ -98,6 +101,16 @@ const iconFor = (name) => {
           decoding="async"
         />
       );
+    case 'PostgreSQL':
+      return (
+        <img
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+          alt="PostgreSQL"
+          className="h-8 w-8"
+          loading="lazy"
+          decoding="async"
+        />
+      );
     case 'MongoDB':
       return (
         <img
@@ -169,6 +182,9 @@ function SkillLogo({ name }) {
 }
 
 export default function Skills() {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = skills.length > MOBILE_LIMIT;
+
   return (
     <section id="skills" className="section scroll-mt-24 py-4">
       <Reveal>
@@ -183,15 +199,50 @@ export default function Skills() {
       </Reveal>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-        {skills.map((skill, idx) => (
-          <Reveal key={skill.name} delay={0.015 * idx}>
-            <div className="glass-panel px-3 py-4 flex flex-col items-center gap-2 text-center hover:bg-white/[0.07] transition-colors">
-              <SkillLogo name={skill.name} />
-              <span className="text-xs font-medium">{skill.name}</span>
-            </div>
-          </Reveal>
-        ))}
+        {skills.map((skill, idx) => {
+          const hideOnMobile = !expanded && idx >= MOBILE_LIMIT;
+          return (
+            <Reveal
+              key={skill.name}
+              delay={0.015 * idx}
+              className={hideOnMobile ? 'hidden md:block' : ''}
+            >
+              <div className="glass-panel px-3 py-4 flex flex-col items-center gap-2 text-center hover:bg-white/[0.07] transition-colors">
+                <SkillLogo name={skill.name} />
+                <span className="text-xs font-medium">{skill.name}</span>
+              </div>
+            </Reveal>
+          );
+        })}
       </div>
+
+      {hasMore && (
+        <div className="mt-6 flex justify-center md:hidden">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-ink hover:bg-white/[0.08] transition-colors"
+          >
+            {expanded
+              ? 'Show less'
+              : `Show all ${skills.length} skills`}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className={`h-4 w-4 transition-transform ${expanded ? 'rotate-180' : ''}`}
+              aria-hidden
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 }
