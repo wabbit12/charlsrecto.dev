@@ -3,6 +3,7 @@ import aqroCustomerHomescreen from '../assets/images/aqro/aqro-customer-homescre
 import aqroScan from '../assets/images/aqro/aqro-scan.png';
 import aqroAdminDashboard from '../assets/images/aqro/aqro-admin-dashboard-statistics.png';
 import aqroThumbnail from '../assets/images/aqro/aqro-thumbnail.JPG';
+import aqroOnboardingVideo from '../assets/videos/aqro/aqro-onboarding.mp4';
 
 import aqroadThumbnail from '../assets/images/aqroad/aqroad-thumbnail.JPG';
 import aqroadDetection from '../assets/images/aqroad/aqroad-detection.JPG';
@@ -31,6 +32,8 @@ import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
 import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.JPG';
 import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG';
 import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.png';
+import plantumThumbnail from '../assets/images/Plantum/plantum-thumbnail.png';
+import plantumDemo from '../assets/videos/plantum/plantum-demo.mp4';
 import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.PNG';
 
 const projects = [
@@ -68,6 +71,46 @@ const projects = [
       'Designed for spontaneous and planned travelers alike',
       'Streamlined trip planning from inspiration to itinerary',
       'Clean, immersive interface for browsing and booking experiences',
+    ],
+  },
+  {
+    slug: 'plantum',
+    title: 'Plantum',
+    description:
+      'Spot rice leaf disease before it spreads. Photograph a leaf in the field and get a clear diagnosis in seconds.',
+    longDescription:
+      'Spot rice leaf disease before it spreads. Photograph a leaf in the field and get a clear diagnosis in seconds. Built for quick field checks—no account, no cloud model calls from your phone once the backend is running.',
+    role: 'Full-Stack Developer',
+    tech: ['Next.js', 'FastAPI', 'PyTorch', 'DINOv2', 'Tailwind CSS'],
+    year: '2026',
+    thumbnail: plantumThumbnail,
+    video: plantumDemo,
+    videoPoster: plantumThumbnail,
+    howItWorksIntro: 'Three steps from leaf to diagnosis.',
+    howItWorks: [
+      {
+        step: '01',
+        title: 'Capture',
+        description:
+          'Fill the frame with a single leaf. Prefer daylight and keep the camera steady.',
+      },
+      {
+        step: '02',
+        title: 'Analyze',
+        description:
+          'Your photo is sent to the local FastAPI model for classification.',
+      },
+      {
+        step: '03',
+        title: 'Act',
+        description:
+          'Review the top prediction and confidence, then decide next steps in the field.',
+      },
+    ],
+    highlights: [
+      'DINOv2 rice-leaf disease classifier running on a local FastAPI backend',
+      'Next.js frontend with Framer Motion for a clear field-ready scanner flow',
+      'Three steps from leaf photo to diagnosis—no account required',
     ],
   },
   {
@@ -172,6 +215,9 @@ const projects = [
     tech: ['MongoDB', 'Express.js', 'React Native', 'Node.js'],
     year: '2025',
     thumbnail: aqroThumbnail,
+    video: aqroOnboardingVideo,
+    videoPoster: aqroThumbnail,
+    videoLabel: 'Onboarding',
     images: [
       {
         src: aqroOnboarding,

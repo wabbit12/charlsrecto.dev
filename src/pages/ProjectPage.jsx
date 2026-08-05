@@ -259,28 +259,78 @@ export default function ProjectPage() {
         </div>
       </Reveal>
 
-      <Reveal delay={0.08}>
-        <div className="space-y-6">
-          <h2 className="font-display text-2xl font-bold">Sample screens</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {(project.images?.length
-              ? project.images
-              : ['Screenshot 1', 'Screenshot 2']
-            ).map((img, idx) => {
-              const isMobileProject = project.slug === 'aqro-mobile-app';
-
-              return (
-                <ProjectImage
-                  key={typeof img === 'string' ? img : img.src || idx}
-                  image={img}
-                  isMobile={isMobileProject}
-                  onImageClick={setSelectedImage}
-                />
-              );
-            })}
+      {project.video && (
+        <Reveal delay={0.06}>
+          <div className="space-y-4">
+            <h2 className="font-display text-2xl font-bold">
+              {project.videoLabel || 'Live demo'}
+            </h2>
+            <div className="glass-panel overflow-hidden">
+              <video
+                className="w-full aspect-video bg-black/40"
+                controls
+                playsInline
+                preload="metadata"
+                poster={project.videoPoster || project.thumbnail}
+              >
+                <source src={project.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      )}
+
+      {!!project.howItWorks?.length && (
+        <Reveal delay={0.08}>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h2 className="font-display text-2xl font-bold">How it works</h2>
+              {project.howItWorksIntro && (
+                <p className="text-muted max-w-2xl">{project.howItWorksIntro}</p>
+              )}
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {project.howItWorks.map((item) => (
+                <div key={item.step} className="glass-panel p-5 sm:p-6 space-y-3">
+                  <span className="text-xs font-medium text-muted tabular-nums">
+                    {item.step}
+                  </span>
+                  <h3 className="font-display text-lg font-bold">{item.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      )}
+
+      {(project.images?.length || !project.video) && (
+        <Reveal delay={0.1}>
+          <div className="space-y-6">
+            <h2 className="font-display text-2xl font-bold">Sample screens</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {(project.images?.length
+                ? project.images
+                : ['Screenshot 1', 'Screenshot 2']
+              ).map((img, idx) => {
+                const isMobileProject = project.slug === 'aqro-mobile-app';
+
+                return (
+                  <ProjectImage
+                    key={typeof img === 'string' ? img : img.src || idx}
+                    image={img}
+                    isMobile={isMobileProject}
+                    onImageClick={setSelectedImage}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
+      )}
 
       <ImageModal
         image={selectedImage}

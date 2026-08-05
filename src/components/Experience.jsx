@@ -3,12 +3,22 @@ import Reveal from './Reveal';
 const experience = [
   {
     org: 'Cellumove',
-    title: 'Developer / After Sales Support',
+    title: 'Software Developer, After-Sales Systems',
     dates: 'November 2025 – June 2026',
     bullets: [
-      'Streamlined work processes by automating them in Sheets, META, and Shopify.',
-      'Developed a chatbot for customer support.',
-      'Created an automated emailing system.',
+      'Automated recurring workflows across Google Sheets, Meta, and Shopify, cutting manual after-sales busywork.',
+      'Built a customer support chatbot that handled common inquiries and sped up response times.',
+      'Shipped an automated emailing system for customer follow-ups and operational notifications.',
+    ],
+  },
+  {
+    org: 'Freelance',
+    title: 'Full Stack Developer / Front-end Web Developer',
+    dates: 'July 2025 – November 2025',
+    bullets: [
+      'Designed and shipped 7+ production landing pages and marketing sites for SaaS, e-commerce, travel, and service businesses using React, Next.js, and Tailwind CSS.',
+      'Owned delivery end-to-end—UI/UX, responsive builds, Framer Motion interactions, and Vercel deployment—with conversion-focused layouts and clear CTAs.',
+      'Built product-style interfaces for clients, including recipe discovery, course progress tracking, booking flows, and AI-assisted funnel pages.',
     ],
   },
   {
@@ -16,9 +26,9 @@ const experience = [
     title: 'Intern',
     dates: 'June 2024 – August 2024',
     bullets: [
-      'Part of the development of the Job Order System, enhancing internal workflow and operations.',
-      'Designed promotional materials for the eLGU launching event in Batanes.',
-      'Created various multimedia content (photos and videos) for the HIMAPS Job Fair.',
+      'Part of the development team for the Job Order System, helping improve internal workflow and day-to-day operations.',
+      'Helped improve work efficiency by ~35% through clearer request tracking and reduced manual handoffs in the Job Order System.',
+      'Designed promotional materials for the eLGU launching event in Batanes and produced photo and video content for the HIMAPS Job Fair.',
     ],
   },
 ];
