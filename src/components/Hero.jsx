@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Reveal from './Reveal';
+import HeroMesh from './HeroMesh';
 import { motion } from 'framer-motion';
 import profilePhoto from '../assets/images/profile.JPG';
 
@@ -22,97 +23,110 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="section flex flex-col justify-start pt-4 sm:pt-6 lg:pt-8 pb-6 sm:pb-8 lg:pb-10"
+      className="relative flex min-h-[calc(100dvh-4.5rem)] flex-col justify-center overflow-hidden py-8 sm:py-10"
     >
-      <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
-        <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
-          <Reveal>
-            <p className="font-brand text-2xl sm:text-3xl md:text-4xl text-ink leading-none">
-              charlsrecto.dev
-            </p>
-          </Reveal>
+      {/* Full-viewport mesh: grid + cursor ripple, fades into the page */}
+      <div
+        className="absolute inset-0 pointer-events-none [mask-image:linear-gradient(to_bottom,transparent_0%,black_14%,black_82%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_14%,black_82%,transparent_100%)]"
+        aria-hidden
+      >
+        <div className="absolute inset-0 opacity-75 [mask-image:radial-gradient(ellipse_95%_95%_at_50%_48%,black_32%,transparent_85%)] [-webkit-mask-image:radial-gradient(ellipse_95%_95%_at_50%_48%,black_32%,transparent_85%)]">
+          <HeroMesh />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-paper/55 via-transparent via-30% to-paper/80" />
+      </div>
 
-          <Reveal delay={0.08}>
-            <motion.h1
-              className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] tracking-tight text-ink"
-              whileHover={{ scale: 1.01 }}
-              transition={{ duration: 0.2 }}
+      <div className="section relative z-10 flex w-full flex-1 flex-col justify-center">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 order-2 lg:order-1">
+            <Reveal>
+              <p className="font-brand text-xl sm:text-2xl md:text-3xl text-ink leading-none">
+                charlsrecto.dev
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <motion.h1
+                className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] tracking-tight text-ink"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+              >
+                Full-stack developer
+                <span className="block text-muted font-semibold text-[0.55em] mt-2 sm:mt-3 tracking-normal">
+                  Charls Dave Recto
+                </span>
+              </motion.h1>
+            </Reveal>
+
+            <Reveal delay={0.14}>
+              <p className="text-sm sm:text-base md:text-lg text-muted leading-relaxed max-w-xl">
+                Building mobile and web apps end-to-end—APIs, databases, and
+                interfaces that feel fast and deliberate.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <div className="flex flex-wrap gap-3 pt-1">
+                <motion.a
+                  href="#projects"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo('projects');
+                  }}
+                  className="inline-flex items-center rounded-xl bg-ink text-paper px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium hover:bg-white/85 transition-colors"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  View projects
+                </motion.a>
+                <motion.a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo('contact');
+                  }}
+                  className="inline-flex items-center border border-white/25 text-ink px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium glass-panel hover:bg-white/10 transition-colors"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Contact me
+                </motion.a>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal
+            className="lg:col-span-5 order-1 lg:order-2 w-full flex justify-center lg:justify-end"
+            delay={0.1}
+          >
+            <motion.div
+              className="relative"
+              style={{ perspective: '1000px' }}
             >
-              Full-stack developer
-              <span className="block text-muted font-semibold text-[0.55em] mt-3 tracking-normal">
-                Charls Dave Recto
-              </span>
-            </motion.h1>
-          </Reveal>
-
-          <Reveal delay={0.14}>
-            <p className="text-base sm:text-lg text-muted leading-relaxed max-w-xl">
-              Building mobile and web apps end-to-end—APIs, databases, and
-              interfaces that feel fast and deliberate.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div className="flex flex-wrap gap-3 pt-1">
-              <motion.a
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollTo('projects');
-                }}
-                className="inline-flex items-center rounded-xl bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-white/85 transition-colors"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+              <div className="absolute -inset-6 sm:-inset-10 bg-white/[0.06] blur-3xl rounded-full pointer-events-none" />
+              <motion.div
+                className="relative h-[min(38vh,280px)] sm:h-[min(42vh,340px)] lg:h-[min(56vh,460px)] aspect-[3/4] overflow-hidden rounded-2xl border border-white/15 bg-black"
+                initial={{ opacity: 0, rotateY: -18, y: 24 }}
+                animate={
+                  imageLoaded
+                    ? { opacity: 1, rotateY: -6, y: 0 }
+                    : { opacity: 0, rotateY: -18, y: 24 }
+                }
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ scale: 1.02, rotateY: 0 }}
               >
-                View projects
-              </motion.a>
-              <motion.a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollTo('contact');
-                }}
-                className="inline-flex items-center border border-white/25 text-ink px-6 py-3 text-sm font-medium glass-panel hover:bg-white/10 transition-colors"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Contact me
-              </motion.a>
-            </div>
+                <img
+                  src={profilePhoto}
+                  alt="Charls Dave Recto"
+                  className="absolute inset-0 block h-full w-full scale-[1.08] object-cover object-[center_20%]"
+                  loading="eager"
+                  fetchPriority="high"
+                  onLoad={() => setImageLoaded(true)}
+                />
+              </motion.div>
+            </motion.div>
           </Reveal>
         </div>
-
-        <Reveal
-          className="lg:col-span-5 order-1 lg:order-2 w-full max-w-sm mx-auto lg:max-w-none lg:mx-0"
-          delay={0.1}
-        >
-          <motion.div
-            className="relative"
-            style={{ perspective: '1000px' }}
-          >
-            <div className="absolute -inset-6 sm:-inset-10 bg-white/[0.06] blur-3xl rounded-full pointer-events-none" />
-            <motion.div
-              className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/15 bg-black"
-              initial={{ opacity: 0, rotateY: -18, y: 24 }}
-              animate={
-                imageLoaded
-                  ? { opacity: 1, rotateY: -6, y: 0 }
-                  : { opacity: 0, rotateY: -18, y: 24 }
-              }
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ scale: 1.02, rotateY: 0 }}
-            >
-              <img
-                src={profilePhoto}
-                alt="Charls Dave Recto"
-                className="absolute inset-0 block h-full w-full scale-[1.08] object-cover object-[center_20%]"
-                loading="eager"
-                fetchPriority="high"
-                onLoad={() => setImageLoaded(true)}
-              />
-            </motion.div>
-          </motion.div>
-        </Reveal>
       </div>
     </section>
   );
