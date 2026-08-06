@@ -37,43 +37,43 @@ export default function Hero() {
       </div>
 
       <div className="section relative z-10 flex w-full flex-1 flex-col justify-center">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7 space-y-5 sm:space-y-6 order-2 lg:order-1">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
             <Reveal>
-              <p className="font-brand text-xl sm:text-2xl md:text-3xl text-ink leading-none">
+              <p className="font-brand text-2xl sm:text-3xl md:text-4xl text-ink leading-none">
                 charlsrecto.dev
               </p>
             </Reveal>
 
             <Reveal delay={0.08}>
               <motion.h1
-                className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.05] tracking-tight text-ink"
+                className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1.05] tracking-tight text-ink"
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.2 }}
               >
                 Full-stack developer
-                <span className="block text-muted font-semibold text-[0.55em] mt-2 sm:mt-3 tracking-normal">
+                <span className="block text-muted font-semibold text-[0.55em] mt-3 sm:mt-4 tracking-normal">
                   Charls Dave Recto
                 </span>
               </motion.h1>
             </Reveal>
 
             <Reveal delay={0.14}>
-              <p className="text-sm sm:text-base md:text-lg text-muted leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg md:text-xl text-muted leading-relaxed max-w-2xl">
                 Building mobile and web apps end-to-end—APIs, databases, and
                 interfaces that feel fast and deliberate.
               </p>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <div className="flex flex-wrap gap-3 pt-1">
+              <div className="flex flex-wrap gap-3 sm:gap-4 pt-1">
                 <motion.a
                   href="#projects"
                   onClick={(e) => {
                     e.preventDefault();
                     scrollTo('projects');
                   }}
-                  className="inline-flex items-center rounded-xl bg-ink text-paper px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium hover:bg-white/85 transition-colors"
+                  className="inline-flex items-center rounded-xl bg-ink text-paper px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium hover:bg-white/85 transition-colors"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -85,7 +85,7 @@ export default function Hero() {
                     e.preventDefault();
                     scrollTo('contact');
                   }}
-                  className="inline-flex items-center border border-white/25 text-ink px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium glass-panel hover:bg-white/10 transition-colors"
+                  className="inline-flex items-center border border-white/25 text-ink px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium glass-panel hover:bg-white/10 transition-colors"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
@@ -105,7 +105,7 @@ export default function Hero() {
             >
               <div className="absolute -inset-6 sm:-inset-10 bg-white/[0.06] blur-3xl rounded-full pointer-events-none" />
               <motion.div
-                className="relative h-[min(38vh,280px)] sm:h-[min(42vh,340px)] lg:h-[min(56vh,460px)] aspect-[3/4] overflow-hidden rounded-2xl border border-white/15 bg-black"
+                className="relative h-[min(42vh,320px)] sm:h-[min(48vh,400px)] lg:h-[min(62vh,540px)] aspect-[3/4] overflow-hidden rounded-2xl border border-white/15 bg-black"
                 initial={{ opacity: 0, rotateY: -18, y: 24 }}
                 animate={
                   imageLoaded
