@@ -14,7 +14,7 @@ const experience = [
   {
     org: 'Freelance',
     title: 'Full Stack Developer / Front-end Web Developer',
-    dates: 'July 2025 – November 2025',
+    dates: 'February 2025 – November 2025',
     bullets: [
       'Designed and shipped 7+ production landing pages and marketing sites for SaaS, e-commerce, travel, and service businesses using React, Next.js, and Tailwind CSS.',
       'Owned delivery end-to-end—UI/UX, responsive builds, Framer Motion interactions, and Vercel deployment—with conversion-focused layouts and clear CTAs.',
