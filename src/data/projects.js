@@ -34,6 +34,7 @@ import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG
 import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.png';
 import plantumThumbnail from '../assets/images/Plantum/plantum-thumbnail.png';
 import plantumDemo from '../assets/videos/plantum/plantum-demo.mp4';
+import pulseThumbnail from '../assets/images/Pulse/pulse-thumbnail.PNG';
 import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.PNG';
 
 const projects = [
@@ -81,7 +82,7 @@ const projects = [
     longDescription:
       'Spot rice leaf disease before it spreads. Photograph a leaf in the field and get a clear diagnosis in seconds. Built for quick field checks—no account, no cloud model calls from your phone once the backend is running.',
     role: 'Full-Stack Developer',
-    tech: ['Next.js', 'FastAPI', 'PyTorch', 'DINOv2', 'Tailwind CSS'],
+    tech: ['Next.js', 'FastAPI', 'PyTorch', 'DINOv2', 'Tailwind CSS', 'Web App', 'Python'],
     year: '2026',
     thumbnail: plantumThumbnail,
     video: plantumDemo,
@@ -111,6 +112,24 @@ const projects = [
       'DINOv2 rice-leaf disease classifier running on a local FastAPI backend',
       'Next.js frontend with Framer Motion for a clear field-ready scanner flow',
       'Three steps from leaf photo to diagnosis—no account required',
+    ],
+  },
+  {
+    slug: 'pulse',
+    title: 'Pulse',
+    description:
+      'Product analytics that ships decisions, not dashboards',
+    longDescription:
+      'See what users do, where they stall, and what to build next — in one focused workspace for product teams. Pulse turns funnels, retention, and feature adoption into clear next experiments.',
+    role: 'Full-Stack Developer',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'SaaS', 'Data Analytics'],
+    year: '2026',
+    thumbnail: pulseThumbnail,
+    externalLink: 'https://pulse-phi-navy.vercel.app/',
+    highlights: [
+      'Opinionated product analytics for activation, retention, and feature adoption',
+      'Decision briefs that turn charts into recommended next experiments',
+      'Built for product teams who ship weekly, not vanity dashboards',
     ],
   },
   {
@@ -212,7 +231,7 @@ const projects = [
     longDescription:
       'Main programmer for aQRo. Built the full-stack mobile experience and led backend logic for intelligent container tracking.',
     role: 'Full-Stack Developer',
-    tech: ['MongoDB', 'Express.js', 'React Native', 'Node.js'],
+    tech: ['MongoDB', 'Express.js', 'React Native', 'Node.js', 'Mobile Development'],
     year: '2025',
     thumbnail: aqroThumbnail,
     video: aqroOnboardingVideo,
@@ -278,7 +297,7 @@ const projects = [
     longDescription:
       'Lead developer for a mobile app built with Ionic Angular and Firebase for real-time navigation across the CSU–Carig campus. Integrated Leaflet Maps and Geolocation API for accurate mapping.',
     role: 'Full-Stack Developer',
-    tech: ['Ionic', 'Angular', 'Firebase', 'Leaflet', 'Geolocation API'],
+    tech: ['Ionic', 'Angular', 'Firebase', 'Leaflet', 'Geolocation API', 'Mobile Development'],
     year: '2024',
     thumbnail: hallpassThumbnail,
     images: [
