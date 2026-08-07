@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import projects from '../data/projects';
 import Reveal from '../components/Reveal';
+import ThumbnailCarousel from '../components/ThumbnailCarousel';
 
 function PhoneFrame({ children, label, onClick }) {
   return (
@@ -205,6 +206,32 @@ export default function ProjectPage() {
   const { slug } = useParams();
   const project = projects.find((p) => p.slug === slug);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageGroups, setImageGroups] = useState(() => project?.imageGroups ?? null);
+  const [screensLoading, setScreensLoading] = useState(() => !!project?.screensLoader);
+
+  useEffect(() => {
+    setImageGroups(project?.imageGroups ?? null);
+    setScreensLoading(!!project?.screensLoader);
+
+    if (!project?.screensLoader) return undefined;
+
+    let cancelled = false;
+    project
+      .screensLoader()
+      .then((mod) => {
+        if (!cancelled) {
+          setImageGroups(mod.default ?? mod.imageGroups ?? null);
+          setScreensLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setScreensLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [project]);
 
   if (!project) {
     return (
@@ -307,7 +334,39 @@ export default function ProjectPage() {
         </Reveal>
       )}
 
-      {(project.images?.length || !project.video) && (
+      {(!!imageGroups?.length || screensLoading) && (
+        <Reveal delay={0.1}>
+          <div className="space-y-10">
+            <h2 className="font-display text-2xl font-bold">Sample screens</h2>
+            {screensLoading && !imageGroups?.length && (
+              <div className="h-[280px] sm:h-[360px] max-w-3xl mx-auto rounded-lg bg-white/[0.03] border border-white/10 animate-pulse" />
+            )}
+            {imageGroups?.map((group, groupIndex) => (
+              <div key={group.id || group.category} className="space-y-4">
+                <div className="space-y-1">
+                  <h3 className="font-display text-xl font-bold">{group.category}</h3>
+                  {group.description && (
+                    <p className="text-sm text-muted max-w-2xl">{group.description}</p>
+                  )}
+                </div>
+                <ThumbnailCarousel
+                  eager={groupIndex === 0}
+                  items={group.images.map((img, i) => ({
+                    id: `${group.id || group.category}-${i}`,
+                    url: img.src,
+                    title: img.label,
+                  }))}
+                  onImageClick={setSelectedImage}
+                />
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      )}
+
+      {!imageGroups?.length &&
+        !project.screensLoader &&
+        (project.images?.length || !project.video) && (
         <Reveal delay={0.1}>
           <div className="space-y-6">
             <h2 className="font-display text-2xl font-bold">Sample screens</h2>

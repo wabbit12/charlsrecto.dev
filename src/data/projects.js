@@ -37,7 +37,35 @@ import plantumDemo from '../assets/videos/plantum/plantum-demo.mp4';
 import pulseThumbnail from '../assets/images/Pulse/pulse-thumbnail.PNG';
 import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.PNG';
 
+import sweldoThumbnail from '../assets/images/Sweldo/sweldo-thumbnail.webp';
+
 const projects = [
+  {
+    slug: 'sweldo',
+    title: 'Sweldo',
+    description:
+      'Clear pay for Philippine teams. A full-stack payroll management system that unifies employee records, timesheets, pay runs, statutory deductions, and payslips — so HR, managers, payroll admins, and employees work from one workspace instead of spreadsheets.',
+    longDescription:
+      'Sweldo is a full-stack payroll management system built for Philippine small and mid-sized teams. It brings employee records, timesheets, pay calculation, approvals, and payslips into one workspace — so HR, managers, payroll admins, and employees each get the tools they need without juggling spreadsheets.',
+    role: 'Full-Stack Developer',
+    tech: ['Next.js', 'React', 'TypeScript', 'Supabase'],
+    year: '2026',
+    thumbnail: sweldoThumbnail,
+    // Screens (~8.5MB) load only on the project detail page
+    screensLoader: () => import('./sweldoScreens'),
+    highlights: [
+      'Employee management — Maintain job details, departments, pay rates, and employment status in one place',
+      'Timesheets — Employees log hours and overtime; managers review, approve, or reject submissions',
+      'Payroll runs — Create pay periods, calculate earnings and deductions, then submit for approval and lock',
+      'Philippine statutory deductions — Automatically compute SSS, PhilHealth, Pag-IBIG, and BIR withholding',
+      'Payslips — Generate downloadable PDF payslips for employees after a run is approved',
+      'Payments & bank export — Track disbursement status and export bank-ready CSV files',
+      'Role-based access — Separate views for employees, managers, HR, payroll admins, and super admins',
+      'Reports & audit trail — View payroll summaries by department or period, with a log of sensitive actions',
+      'In-app notifications — Alerts for approvals, ready payslips, and payment updates',
+      'Secure accounts — Login with password recovery, admin MFA, and protected sensitive employee data',
+    ],
+  },
   {
     slug: 'verdura',
     title: 'Verdura',
