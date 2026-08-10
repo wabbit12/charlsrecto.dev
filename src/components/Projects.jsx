@@ -3,7 +3,7 @@ import projects from '../data/projects';
 import ProjectCard from './ProjectCard';
 import Reveal from './Reveal';
 
-const MOBILE_LIMIT = 5;
+const MOBILE_LIMIT = 8;
 
 export default function Projects() {
   const [expanded, setExpanded] = useState(false);

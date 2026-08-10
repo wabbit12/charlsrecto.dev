@@ -39,6 +39,7 @@ import pulseThumbnail from '../assets/images/Pulse/pulse-thumbnail.webp';
 import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.webp';
 
 import sweldoThumbnail from '../assets/images/Sweldo/sweldo-thumbnail.webp';
+import cedarAndStoneThumbnail from '../assets/images/CedarAndStone/cedar-and-stone-thumbnail.JPG';
 
 const projects = [
   {
@@ -65,6 +66,24 @@ const projects = [
       'Reports & audit trail — View payroll summaries by department or period, with a log of sensitive actions',
       'In-app notifications — Alerts for approvals, ready payslips, and payment updates',
       'Secure accounts — Login with password recovery, admin MFA, and protected sensitive employee data',
+    ],
+  },
+  {
+    slug: 'cedar-and-stone',
+    title: 'Cedar & Stone',
+    description:
+      'A one-business marketing site for a local renovation studio. Built as a custom WordPress theme (pages, blog, contact form, menus).',
+    longDescription:
+      'A one-business marketing site for a local renovation studio. Built as a custom WordPress theme (pages, blog, contact form, menus).',
+    role: 'Full-Stack Developer',
+    tech: ['WordPress', 'Custom Theme', 'PHP', 'Responsive Design', 'UI Design'],
+    year: '2026',
+    thumbnail: cedarAndStoneThumbnail,
+    externalLink: 'https://cedar-stone-eta.vercel.app/',
+    highlights: [
+      'Custom WordPress theme with pages, blog, contact form, and menus',
+      'Recreated in Next.js + React + TypeScript for a fast portfolio demo',
+      'Same layout, content, and imagery across both implementations',
     ],
   },
   {
