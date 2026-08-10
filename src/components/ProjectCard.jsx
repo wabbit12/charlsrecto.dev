@@ -52,6 +52,8 @@ function ProjectCard({ project }) {
                   ? 'max-w-full max-h-full object-contain'
                   : 'absolute inset-0 w-full h-full object-cover'
               }
+              loading="lazy"
+              decoding="async"
             />
           ) : null}
         </div>

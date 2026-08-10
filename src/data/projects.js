@@ -1,42 +1,42 @@
-import aqroOnboarding from '../assets/images/aqro/aqro-onboarding.png';
-import aqroCustomerHomescreen from '../assets/images/aqro/aqro-customer-homescreen.png';
-import aqroScan from '../assets/images/aqro/aqro-scan.png';
-import aqroAdminDashboard from '../assets/images/aqro/aqro-admin-dashboard-statistics.png';
-import aqroThumbnail from '../assets/images/aqro/aqro-thumbnail.JPG';
+import aqroOnboarding from '../assets/images/aqro/aqro-onboarding.webp';
+import aqroCustomerHomescreen from '../assets/images/aqro/aqro-customer-homescreen.webp';
+import aqroScan from '../assets/images/aqro/aqro-scan.webp';
+import aqroAdminDashboard from '../assets/images/aqro/aqro-admin-dashboard-statistics.webp';
+import aqroThumbnail from '../assets/images/aqro/aqro-thumbnail.webp';
 import aqroOnboardingVideo from '../assets/videos/aqro/aqro-onboarding.mp4';
 
-import aqroadThumbnail from '../assets/images/aqroad/aqroad-thumbnail.JPG';
-import aqroadDetection from '../assets/images/aqroad/aqroad-detection.JPG';
-import aqroadSignsList from '../assets/images/aqroad/aqroad-signs-list.JPG';
+import aqroadThumbnail from '../assets/images/aqroad/aqroad-thumbnail.webp';
+import aqroadDetection from '../assets/images/aqroad/aqroad-detection.webp';
+import aqroadSignsList from '../assets/images/aqroad/aqroad-signs-list.webp';
 
-import hallpassThumbnail from '../assets/images/HallPass/hallpass-thumbnail.png';
-import hallpassLanding from '../assets/images/HallPass/landing.png';
-import hallpassLogin from '../assets/images/HallPass/login.png';
-import hallpassSignUp from '../assets/images/HallPass/sign-up.png';
-import hallpassMainPage from '../assets/images/HallPass/main-page.png';
-import hallpassMapPage from '../assets/images/HallPass/map-page.png';
-import hallpassProfilePage from '../assets/images/HallPass/profile-page.png';
+import hallpassThumbnail from '../assets/images/HallPass/hallpass-thumbnail.webp';
+import hallpassLanding from '../assets/images/HallPass/landing.webp';
+import hallpassLogin from '../assets/images/HallPass/login.webp';
+import hallpassSignUp from '../assets/images/HallPass/sign-up.webp';
+import hallpassMainPage from '../assets/images/HallPass/main-page.webp';
+import hallpassMapPage from '../assets/images/HallPass/map-page.webp';
+import hallpassProfilePage from '../assets/images/HallPass/profile-page.webp';
 
-import roombaThumbnail from '../assets/images/HallPass/roomba/roomba-thumbnail.png';
-import roombaMain from '../assets/images/HallPass/roomba/main.png';
-import roombaBoardingHouseDetails from '../assets/images/HallPass/roomba/boarding-house-details.png';
-import roombaFilters from '../assets/images/HallPass/roomba/filters.png';
+import roombaThumbnail from '../assets/images/HallPass/roomba/roomba-thumbnail.webp';
+import roombaMain from '../assets/images/HallPass/roomba/main.webp';
+import roombaBoardingHouseDetails from '../assets/images/HallPass/roomba/boarding-house-details.webp';
+import roombaFilters from '../assets/images/HallPass/roomba/filters.webp';
 
-import dictionaryThumbnail from '../assets/images/dictionary/dictionary-thumbnail.png';
-import dictionaryMain from '../assets/images/dictionary/main-dictionary.png';
-import dictionaryResult from '../assets/images/dictionary/result.png';
+import dictionaryThumbnail from '../assets/images/dictionary/dictionary-thumbnail.webp';
+import dictionaryMain from '../assets/images/dictionary/main-dictionary.webp';
+import dictionaryResult from '../assets/images/dictionary/result.webp';
 
-import flowlaunchThumbnail from '../assets/images/FlowLaunch/flowlaunch.JPG';
-import nightwaveThumbnail from '../assets/images/NightWave/nightwave.JPG';
-import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
-import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.JPG';
-import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG';
-import emberThumbnail from '../assets/images/Ember/ember-thumbnail.PNG';
-import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.png';
-import plantumThumbnail from '../assets/images/Plantum/plantum-thumbnail.png';
+import flowlaunchThumbnail from '../assets/images/FlowLaunch/flowlaunch.webp';
+import nightwaveThumbnail from '../assets/images/NightWave/nightwave.webp';
+import harborbookThumbnail from '../assets/images/HarborBook/harborbook.webp';
+import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.webp';
+import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.webp';
+import emberThumbnail from '../assets/images/Ember/ember-thumbnail.webp';
+import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.webp';
+import plantumThumbnail from '../assets/images/Plantum/plantum-thumbnail.webp';
 import plantumDemo from '../assets/videos/plantum/plantum-demo.mp4';
-import pulseThumbnail from '../assets/images/Pulse/pulse-thumbnail.PNG';
-import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.PNG';
+import pulseThumbnail from '../assets/images/Pulse/pulse-thumbnail.webp';
+import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.webp';
 
 import sweldoThumbnail from '../assets/images/Sweldo/sweldo-thumbnail.webp';
 

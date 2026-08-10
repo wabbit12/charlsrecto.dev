@@ -23,7 +23,7 @@ const experience = [
   },
   {
     org: 'Department of Information and Communications Technology (DICT) – Regional Office II',
-    title: 'Intern',
+    title: 'Full Stack/Software Developer Intern',
     dates: 'June 2024 – August 2024',
     bullets: [
       'Part of the development team for the Job Order System, helping improve internal workflow and day-to-day operations.',

@@ -1,8 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Reveal from './Reveal';
 import HeroMesh from './HeroMesh';
 import { motion } from 'framer-motion';
-import profilePhoto from '../assets/images/profile.JPG';
+
+const PROFILE_SRCSET =
+  '/images/profile-640.webp 640w, /images/profile.webp 900w';
+const PROFILE_SIZES =
+  '(max-width: 1023px) min(70vw, 320px), min(36vw, 405px)';
+const PROFILE_SRC = '/images/profile.webp';
+/** Tiny blur placeholder — paints instantly while the full photo loads */
+const PROFILE_LQIP =
+  'data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAACwBACdASoSABgAPzmOwVcvKaejqAqp4CcJZQAALnhg3wnW/i4d7AGrfkoUOHOAAP7jB6F/Atp1z9HHHuYn7awhLFSKwvy6Lnxc/MkxlTh+qL4ISjqDqx3IYXwtOAyQXGb1AbjF6RVLmg7wAAA=';
 
 const scrollTo = (sectionId) => {
   const element = document.getElementById(sectionId);
@@ -13,12 +21,6 @@ const scrollTo = (sectionId) => {
 
 export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = profilePhoto;
-    img.onload = () => setImageLoaded(true);
-  }, []);
 
   return (
     <section
@@ -107,19 +109,29 @@ export default function Hero() {
               <motion.div
                 className="relative h-[min(42vh,320px)] sm:h-[min(48vh,400px)] lg:h-[min(62vh,540px)] aspect-[3/4] overflow-hidden rounded-2xl border border-white/15 bg-black"
                 initial={{ opacity: 0, rotateY: -18, y: 24 }}
-                animate={
-                  imageLoaded
-                    ? { opacity: 1, rotateY: -6, y: 0 }
-                    : { opacity: 0, rotateY: -18, y: 24 }
-                }
+                animate={{ opacity: 1, rotateY: -6, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ scale: 1.02, rotateY: 0 }}
               >
+                {/* LQIP backdrop so the frame never looks empty */}
                 <img
-                  src={profilePhoto}
+                  src={PROFILE_LQIP}
+                  alt=""
+                  aria-hidden
+                  className="absolute inset-0 block h-full w-full scale-110 object-cover object-[center_20%] blur-xl"
+                />
+                <img
+                  src={PROFILE_SRC}
+                  srcSet={PROFILE_SRCSET}
+                  sizes={PROFILE_SIZES}
                   alt="Charls Dave Recto"
-                  className="absolute inset-0 block h-full w-full scale-[1.08] object-cover object-[center_20%]"
+                  width={901}
+                  height={1200}
+                  className={`absolute inset-0 block h-full w-full scale-[1.08] object-cover object-[center_20%] transition-opacity duration-500 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
                   loading="eager"
+                  decoding="async"
                   fetchPriority="high"
                   onLoad={() => setImageLoaded(true)}
                 />
