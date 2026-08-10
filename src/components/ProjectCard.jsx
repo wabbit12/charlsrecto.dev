@@ -2,8 +2,17 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const CONTAIN_THUMBNAIL_SLUGS = new Set([
+  'voyage',
+  'verdura',
+  'aqro-mobile-app',
+  'dictionary-app-java',
+  'roomba-boarding-house-finder',
+]);
+
 function ProjectCard({ project }) {
   const isExternal = !!project.externalLink;
+  const containThumbnail = CONTAIN_THUMBNAIL_SLUGS.has(project.slug);
   const linkProps = isExternal
     ? {
         href: project.externalLink,
@@ -29,12 +38,20 @@ function ProjectCard({ project }) {
           isExternal ? `Visit ${project.title}` : `Learn more about ${project.title}`
         }
       >
-        <div className="relative aspect-[16/10] bg-white/[0.03] overflow-hidden flex items-center justify-center flex-shrink-0 border-b border-white/10">
+        <div
+          className={`relative aspect-[16/10] bg-white/[0.03] overflow-hidden flex-shrink-0 border-b border-white/10 ${
+            containThumbnail ? 'flex items-center justify-center' : ''
+          }`}
+        >
           {project.thumbnail ? (
             <img
               src={project.thumbnail}
               alt={project.title}
-              className="max-w-full max-h-full object-contain"
+              className={
+                containThumbnail
+                  ? 'max-w-full max-h-full object-contain'
+                  : 'absolute inset-0 w-full h-full object-cover'
+              }
             />
           ) : null}
         </div>

@@ -31,6 +31,7 @@ import nightwaveThumbnail from '../assets/images/NightWave/nightwave.JPG';
 import harborbookThumbnail from '../assets/images/HarborBook/harborbook.JPG';
 import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.JPG';
 import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.JPG';
+import emberThumbnail from '../assets/images/Ember/ember-thumbnail.PNG';
 import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.png';
 import plantumThumbnail from '../assets/images/Plantum/plantum-thumbnail.png';
 import plantumDemo from '../assets/videos/plantum/plantum-demo.mp4';
@@ -179,6 +180,24 @@ const projects = [
     ],
   },
   {
+    slug: 'ember',
+    title: 'Ember',
+    description:
+      'A marketing landing page for a copy-paste SaaS landing kit — polished dark, amber-toned pages for product teams who want to ship without designing from scratch.',
+    longDescription:
+      'Ember is a marketing landing page for a copy-paste SaaS landing kit. Aimed at product teams who want a polished dark, amber-toned site without designing from scratch — drop the React, shadcn/ui, and Tailwind components into a Next.js app, swap branding and copy, and ship.',
+    role: 'Product Designer & Frontend Developer',
+    tech: ['React', 'Next.js', 'Tailwind CSS', 'SaaS'],
+    year: '2026',
+    thumbnail: emberThumbnail,
+    externalLink: 'https://ember-eight-peach.vercel.app/',
+    highlights: [
+      'Copy-paste landing kit for React, shadcn/ui, and Tailwind',
+      'Dark amber-toned marketing site tuned for SaaS launches',
+      'Drop components into Next.js, swap brand and copy, then ship',
+    ],
+  },
+  {
     slug: 'coursecompass',
     title: 'CourseCompass',
     description:
@@ -196,6 +215,7 @@ const projects = [
       'User-friendly dashboard with insights',
     ],
   },
+
   {
     slug: 'flowlaunch',
     title: 'FlowLaunch',
