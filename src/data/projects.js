@@ -32,6 +32,7 @@ import harborbookThumbnail from '../assets/images/HarborBook/harborbook.webp';
 import freshplateThumbnail from '../assets/images/FreshPlate/thumbnaill.webp';
 import coursecompassThumbnail from '../assets/images/CourseCompass/thumbnail.webp';
 import emberThumbnail from '../assets/images/Ember/ember-thumbnail.webp';
+import houstonTableThumbnail from '../assets/images/HoustonTableCollective/houston-table-thumbnail.webp';
 import voyageThumbnail from '../assets/images/Voyage/voyage-thumbnail.webp';
 import plantumThumbnail from '../assets/images/Plantum/plantum-thumbnail.webp';
 import plantumDemo from '../assets/videos/plantum/plantum-demo.mp4';
@@ -39,7 +40,7 @@ import pulseThumbnail from '../assets/images/Pulse/pulse-thumbnail.webp';
 import verduraThumbnail from '../assets/images/Verdura/Verdura-thumbnail.webp';
 
 import sweldoThumbnail from '../assets/images/Sweldo/sweldo-thumbnail.webp';
-import cedarAndStoneThumbnail from '../assets/images/CedarAndStone/cedar-and-stone-thumbnail.JPG';
+import cedarAndStoneThumbnail from '../assets/images/CedarAndStone/cedar-and-stone-thumbnail.webp';
 
 const projects = [
   {
@@ -214,6 +215,24 @@ const projects = [
       'Copy-paste landing kit for React, shadcn/ui, and Tailwind',
       'Dark amber-toned marketing site tuned for SaaS launches',
       'Drop components into Next.js, swap brand and copy, then ship',
+    ],
+  },
+  {
+    slug: 'houston-table-collective',
+    title: 'Houston Table Collective',
+    description:
+      'Three restaurant concepts. Three design systems. A portfolio demo for food and hospitality web design — each venue with its own typography, color, motion, and photography mood.',
+    longDescription:
+      'Houston Table Collective is a portfolio demo for hospitality web design: three restaurant concepts, three design systems, one maintainable codebase. Each venue is a complete responsive site with its own typography, color, motion, and photography mood — sharing only content patterns and engineering primitives underneath.',
+    role: 'Product Designer & Frontend Developer',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Food & Hospitality'],
+    year: '2026',
+    thumbnail: houstonTableThumbnail,
+    externalLink: 'https://houston-table.vercel.app/',
+    highlights: [
+      'Three restaurant concepts with distinct design systems',
+      'Shared content patterns and engineering primitives',
+      'Built for food and hospitality web design portfolios',
     ],
   },
   {
